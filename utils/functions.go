@@ -32,7 +32,6 @@ func CreateMenuItemImageImage(c *gin.Context) (string, error) {
 		return "", errors.New("enviroment variable is not set")
 	}
 
-	locationBigImages := locationImage
 	if err != nil {
 		if err.Error() != "http: no such file" {
 
@@ -40,7 +39,7 @@ func CreateMenuItemImageImage(c *gin.Context) (string, error) {
 		}
 	} else {
 		// Create a temporary file within our temp-images directory that follows
-		tempFile, err := ioutil.TempFile(locationBigImages, "upload-*.jpeg")
+		tempFile, err := ioutil.TempFile(locationImage, "upload-*.jpeg")
 		if err != nil {
 			return "", err
 		}

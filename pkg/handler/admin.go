@@ -88,6 +88,7 @@ func (h *Handler) createMenuItem(c *gin.Context) {
 	}
 	menuItem.ID = id
 	menuItem.Image = imageName
+	log.Print(imageName)
 	err = h.services.Menu.CreateMenuItem(menuItem)
 	if err != nil {
 		defaultErrorHandler(c, err)
