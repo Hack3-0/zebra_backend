@@ -1,7 +1,7 @@
 package utils
 
 const (
-	QrGetURL      = "http://localhost:4000/authed/cashier/getFullInfo?id="
+	QrGetURL      = "http://3.70.198.111:4000/authed/getUserInfo?id="
 	TypeUser      = "user"
 	TypeCashier   = "cashier"
 	TypeAdmin     = "admin"
