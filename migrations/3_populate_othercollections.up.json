@@ -30,14 +30,17 @@
                 ]
         },
         {
-                "insert": "organizations",
+                "insert": "menuItems",
                 "documents":[
                         {
-                                "id" : 0,
-                                "password" : "password1",
-                                "token":"admin",
-                                "address" : "",
-                                "cashierID" : []
+                                "id" : 1,
+                                "name" : "Latte",
+                                "description":"Vkusni",
+                                "category" : "coffee",
+                                "price" : 950,
+                                "discount":0.15,
+                                "hasSugar":true,
+                                "image":"none"
                         }
                 ]
         }

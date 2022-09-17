@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CreateMeasurementsUploadImage(c *gin.Context) (string, error) {
+func CreateMenuItemImageImage(c *gin.Context) (string, error) {
 	// Image handling
 	c.Request.ParseMultipartForm(10 << 20)
 
@@ -26,13 +26,13 @@ func CreateMeasurementsUploadImage(c *gin.Context) (string, error) {
 		defer file.Close()
 	}
 
-	locationImage, exists := os.LookupEnv("LocationMeasurementsUploadImage")
+	locationImage, exists := os.LookupEnv("LocationMenuItems")
 
 	if !exists {
 		return "", errors.New("enviroment variable is not set")
 	}
 
-	locationBigImages := locationImage + "bigImage/"
+	locationBigImages := locationImage
 	if err != nil {
 		if err.Error() != "http: no such file" {
 

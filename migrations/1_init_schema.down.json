@@ -3,15 +3,9 @@
     "drop": "users"
   },
   {
-      "drop": "organizations"
-  },
-  {
       "drop": "menuItems"
   },
   {
       "drop": "orders"
-  },
-  {
-      "drop":"menu"
   }
 ]

@@ -49,6 +49,7 @@ type Admin interface {
 	GetOrgByUsername(username string) (*model.Organization, error)
 	GetOrganizations() ([]*model.Organization, error)
 	AddCashier(id, newID int) error
+	CreateHeadAdmin(token, password, username, userType string) error
 }
 type Cashier interface {
 	CreateCash(data model.ReqCashRegistration) error

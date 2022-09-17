@@ -3,10 +3,12 @@ package main
 import (
 	"context"
 	"errors"
+	"log"
 	"os"
 	"zebra"
 
 	"zebra/pkg/fcmService"
+	"zebra/utils"
 
 	"github.com/appleboy/go-fcm"
 
@@ -53,7 +55,10 @@ func main() {
 	}
 
 	repos := repository.NewRepository(db)
-
+	err = repos.Admin.CreateHeadAdmin(os.Getenv("HeadAdminToken"), os.Getenv("HeadAdminUsername"), os.Getenv("HeadAdminPassword"), utils.TypeHeadAdmin)
+	if err != nil {
+		log.Print(err)
+	}
 	fService := fcmService.NewFcmService(repos, fcmClient, db)
 	service := service.NewService(repos, fService)
 	handlers := handler.NewHandler(service)
@@ -87,6 +92,8 @@ func initEnv() error {
 		"LocationImage",
 		"LocationQr",
 		"HeadAdminToken",
+		"HeadAdminUsername",
+		"HeadAdminPassword",
 	}
 
 	for i := 0; i < len(reqs); i++ {
