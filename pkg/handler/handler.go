@@ -22,6 +22,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	unauthed := router.Group("/unauthed")
 	{
 		unauthed.POST("/signup", h.signUp)
+		unauthed.GET("/hell", h.hello)
 		//unauthed.POST("/signin", h.signIn)
 		//unauthed.POST("/checkUsername", h.checkUsername)
 	}

@@ -10,6 +10,10 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func (h *Handler) hello(c *gin.Context) {
+	sendSuccess(c)
+}
+
 func (h *Handler) signUp(c *gin.Context) {
 
 	var reqUser model.ReqUserRegistration
