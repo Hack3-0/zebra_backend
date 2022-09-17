@@ -9,6 +9,8 @@ services:
     restart: always
     volumes:
       - ${LocationImage}:${LocationImage}
+      - ${LocationQr}:${LocationQr}
+      - ${LocationMenuItems}:${LocationMenuItems}
     ports:
       - 4000:4000
       - 8080:8080

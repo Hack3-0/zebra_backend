@@ -22,15 +22,30 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	unauthed := router.Group("/unauthed")
 	{
 		unauthed.POST("/signup", h.signUp)
-		unauthed.GET("/hell", h.hello)
-		//unauthed.POST("/signin", h.signIn)
-		//unauthed.POST("/checkUsername", h.checkUsername)
-	}
-	/*
-		authed := router.Group("/authed", h.userIdentity)
-		{
+		unauthed.POST("/signin", h.signIn)
+		unauthed.POST("/getOrganizations", h.getOrganizations)
 
-		}*/
+	}
+	//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0NDEyMzcsInVzZXJJZCI6M30.2nL_PBWJ7MXZia6Q0e9xdMuysk3ijkY5J1yL_FKRgZE
+
+	authed := router.Group("/authed", h.userIdentity)
+	{
+		authed.POST("/startSession", h.startSession)
+		authed.POST("/endSession", h.endSession)
+		authed.POST("/makeOrder", h.makeOrder)
+		//authed.POST("/changeOrderStatus", h.changeOrderStatus)
+		authed.GET("/getUser", h.getUser)
+		authed.POST("/changeOrganization", h.changeOrganization)
+		admin := authed.Group("/admin", h.adminIdentity)
+		{
+			admin.POST("/signup", h.signUpCash)
+			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
+			{
+				headAdmin.POST("/signup", h.signUpOrg)
+			}
+		}
+	}
+
 	return router
 }
 

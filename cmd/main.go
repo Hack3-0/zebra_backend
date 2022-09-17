@@ -85,6 +85,8 @@ func initEnv() error {
 		"StaticPortHTTP",
 		"APIPortHTTP",
 		"LocationImage",
+		"LocationQr",
+		"HeadAdminToken",
 	}
 
 	for i := 0; i < len(reqs); i++ {

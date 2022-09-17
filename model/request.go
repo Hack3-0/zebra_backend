@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -87,11 +88,11 @@ type ReqUserRegistration struct {
 	Token                string
 	Username             string      `json:"username" bson:"username"`
 	Password             string      `json:"password" bson:"password"`
-	Type                 string      `json:"type" bson:"type"`
+	Name                 string      `json:"name" bson:"name"`
 	Preference           *Preference `json:"preference" bson:"preference"`
 	SelectedOrganization int         `json:"selectedOrganization" bson:"selectedOrganization"`
-	PushToken            string      `json:"pushToken"`
-	PhoneNumber          string      `json:"phoneNumber"`
+	PushToken            string      `json:"pushToken" bson:"pushToken"`
+	PhoneNumber          string      `json:"phoneNumber" bson:"pushToken"`
 }
 
 func (p *ReqUserRegistration) ParseRequest(c *gin.Context) error {
@@ -106,11 +107,52 @@ func (p *ReqUserRegistration) ParseRequest(c *gin.Context) error {
 	return nil
 }
 
+type ReqOrgRegistration struct {
+	ID       int
+	Token    string
+	Username string `json:"username" bson:"username"`
+	Password string `json:"password" bson:"password"`
+	Name     string `json:"name" bson:"name"`
+	Address  string `json:"address" bson:"address"`
+}
+
+func (p *ReqOrgRegistration) ParseRequest(c *gin.Context) error {
+	if err := c.ShouldBindWith(&p, binding.JSON); err != nil {
+		return errors.New("bad request | " + err.Error())
+	}
+
+	if p.Username == "" || p.Password == "" {
+		return errors.New("bad request | empty fields")
+	}
+
+	return nil
+}
+
+type ReqCashRegistration struct {
+	ID             int
+	Token          string
+	Username       string `json:"username" bson:"username"`
+	Password       string `json:"password" bson:"password"`
+	Name           string `json:"name" bson:"name"`
+	OrganizationID int
+}
+
+func (p *ReqCashRegistration) ParseRequest(c *gin.Context) error {
+	if err := c.ShouldBindWith(&p, binding.JSON); err != nil {
+		return errors.New("bad request | " + err.Error())
+	}
+
+	if p.Username == "" || p.Password == "" {
+		return errors.New("bad request | empty fields")
+	}
+
+	return nil
+}
+
 type ReqUserLogin struct {
-	Username  string `json:"email" binding:"required"`
+	Username  string `json:"username" binding:"required"`
 	Password  string `json:"password" binding:"required"`
 	PushToken string `json:"pushToken"`
-	BoymanData
 }
 
 func (p *ReqUserLogin) ParseRequest(c *gin.Context) error {
@@ -118,6 +160,27 @@ func (p *ReqUserLogin) ParseRequest(c *gin.Context) error {
 		return errors.New("bad request | " + err.Error())
 	}
 
+	return nil
+}
+
+type ReqOrder struct {
+	ID             int
+	UserID         int   `json:"userID" bson:"userID"`
+	CashierID      int   `json:"cashierID" bson:"cashierID"`
+	OrganizationID int   `json:"organizationID" bson:"organizationID"`
+	Items          []int `json:"items" bson:"items"`
+	Status         string
+	Time           time.Time // can add start time and end time to check average completion time
+}
+
+func (p *ReqOrder) ParseRequest(c *gin.Context) error {
+	if err := c.ShouldBindWith(&p, binding.JSON); err != nil {
+		return errors.New("bad request | " + err.Error())
+	}
+
+	if p.UserID == 0 || p.OrganizationID == 0 || len(p.Items) == 0 {
+		return errors.New("bad request | empty fields")
+	}
 	return nil
 }
 

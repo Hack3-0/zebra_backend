@@ -30,10 +30,40 @@ type PushNotification interface {
 	GetShortUser(TakerID, SenderID int) (*model.ShortUserSuggest, error)*/
 }
 
+type User interface {
+	GetUserByID(id int) (*model.User, error)
+	ChangeOrganization(id, orgID int) error
+}
+
+type Admin interface {
+	CreateOrg(data model.ReqOrgRegistration) error
+	GetOrgByID(id int) (*model.Organization, error)
+	GetOrgByUsername(username string) (*model.Organization, error)
+	GetOrganizations() ([]*model.Organization, error)
+	AddCashier(id, newID int) error
+}
+type Cashier interface {
+	CreateCash(data model.ReqCashRegistration) error
+	GetCashByID(id int) (*model.Cashier, error)
+	GetCashByUsername(username string) (*model.Cashier, error)
+	StartSession(id, orgID int) error
+	UpdateWorkHours(id int, sessionDuration float32) error
+}
+
+type Order interface {
+	CreateOrder(data model.ReqOrder) error
+	GetOrderByID(id int) (*model.Order, error)
+	GetNewOrderID() (int, error)
+}
+
 type Repository struct {
 	Unauthed
-	//Profile
+	User
+	Admin
 	PushNotification
+	Cashier
+	Order
+
 	//LocalNotification
 }
 
@@ -42,5 +72,9 @@ func NewRepository(db *mongo.Database) *Repository {
 		Unauthed: NewUnauthMongo(db),
 		//Profile:           NewProfileMongo(db),
 		PushNotification: NewPushNotificationMongo(db),
+		User:             NewUserMongo(db),
+		Admin:            NewAdminMongo(db),
+		Cashier:          NewCashierMongo(db),
+		Order:            NewOrderMongo(db),
 	}
 }

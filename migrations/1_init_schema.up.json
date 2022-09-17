@@ -1,0 +1,17 @@
+[
+    {
+      "create": "users"
+    },
+    {
+        "create": "organizations"
+    },
+    {
+        "create": "menuItems"
+    },
+    {
+        "create": "orders"
+    },
+    {
+        "create": "menu"
+    }
+]

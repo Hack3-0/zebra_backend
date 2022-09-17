@@ -1,0 +1,44 @@
+[
+        {
+                "insert": "users",
+                "documents": [
+                        {
+                                "id": 1,
+                                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0MjA3MDEsInVzZXJJZCI6MX0.awm9eY6mg2olhRO8qX5g2MR1L_2CopUowiDjHPNezKc",
+                                "pushToken": "",
+                                "username": "Zebara",
+                                "passsword": "123",
+                                "phoneNumber": "87475842105",
+                                "type": "user",
+                                "preference": {
+                                "sugar": true,
+                                "coffeeType": [
+                                        1,
+                                        2,
+                                        3
+                                ],
+                                "snack": [
+                                        1
+                                ],
+                                "milk": [
+                                        2,
+                                        3
+                                ]
+                                },
+                                "selectedOrganization": 1
+                        }
+                ]
+        },
+        {
+                "insert": "organizations",
+                "documents":[
+                        {
+                                "id" : 0,
+                                "password" : "password1",
+                                "token":"admin",
+                                "address" : "",
+                                "cashierID" : []
+                        }
+                ]
+        }
+]

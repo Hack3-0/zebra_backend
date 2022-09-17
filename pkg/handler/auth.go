@@ -30,7 +30,6 @@ func (h *Handler) signUp(c *gin.Context) {
 	log.Print(reqUser.Username)
 
 	user, err := h.services.Unauthed.GetUserByPhone(reqUser.PhoneNumber)
-	log.Print(err.Error())
 	if err != nil && err.Error() != "mongo: no documents in result" {
 		defaultErrorHandler(c, err)
 		return
@@ -56,8 +55,6 @@ func (h *Handler) signUp(c *gin.Context) {
 	sendGeneral(res, c)
 }
 
-/*
-
 func (h *Handler) signIn(c *gin.Context) {
 	var reqData model.ReqUserLogin
 
@@ -67,18 +64,24 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
-	user, err := h.services.GetUserByEmail(reqData.Email)
+	user, err := h.services.GetUserByUsername(reqData.Username)
 
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
-	h.services.SetPushToken(reqData.Email, reqData.PushToken)
+
+	if user.Password != reqData.Password {
+		defaultErrorHandler(c, errors.New("username or password is wrong"))
+		return
+	}
+
+	h.services.SetPushToken(reqData.Username, reqData.PushToken)
 
 	sendGeneral(user, c)
 }
-*/
 
+/*
 func (h *Handler) checkUsername(c *gin.Context) {
 	var reqData model.ReqCheckUsername
 
@@ -96,4 +99,4 @@ func (h *Handler) checkUsername(c *gin.Context) {
 	}
 
 	sendSuccess(c)
-}
+}*/

@@ -1,0 +1,57 @@
+package handler
+
+import (
+	"log"
+	"net/http"
+	"zebra/model"
+	"zebra/utils"
+
+	"github.com/gin-gonic/gin"
+)
+
+func (h *Handler) makeOrder(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	var reqOrder model.ReqOrder
+	err = reqOrder.ParseRequest(c)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	log.Print(reqOrder)
+	user, err := h.services.User.GetUserByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	log.Print(user)
+	if user.Type == utils.TypeUser {
+		org, err := h.services.Admin.GetOrgByID(reqOrder.OrganizationID)
+		if err != nil {
+			defaultErrorHandler(c, err)
+			return
+		}
+		reqOrder.CashierID = org.Active
+	}
+	log.Printf("cash id is %v", reqOrder.CashierID)
+
+	orderID, err := h.services.Order.GetNewOrderID()
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	reqOrder.ID = orderID
+	log.Printf("orderID is %v", orderID)
+	err = h.services.Order.CreateOrder(reqOrder)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	sendSuccess(c)
+}

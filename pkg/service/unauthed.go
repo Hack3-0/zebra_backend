@@ -1,17 +1,20 @@
 package service
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"errors"
+	"image/color"
 	"log"
+	"os"
+	"strconv"
 	"time"
 
 	"zebra/model"
 	"zebra/pkg/fcmService"
 	"zebra/pkg/repository"
+	"zebra/utils"
 
 	"github.com/dgrijalva/jwt-go"
+	"github.com/skip2/go-qrcode"
 )
 
 const (
@@ -48,7 +51,13 @@ func (s *UnauthedService) CreateUser(user model.ReqUserRegistration) error {
 		return err
 	}
 	log.Print(user.Token)
-
+	url := utils.QrGetURL + strconv.Itoa(user.ID)
+	log.Print(url)
+	err = qrcode.WriteColorFile(url, qrcode.High, 256, color.Black, color.White, os.Getenv("LocationQr")+strconv.Itoa(user.ID)+".png")
+	log.Print(strconv.Itoa(user.ID) + ".png")
+	if err != nil {
+		return err
+	}
 	err = s.repo.CreateUser(user)
 	if err != nil {
 		return err
@@ -97,28 +106,6 @@ func (s *UnauthedService) ParseToken(accessToken string) (int, error) {
 
 func (s *UnauthedService) GetNewUserID() (int, error) {
 	return s.repo.GetNewUserID()
-}
-
-func (s *UnauthedService) CheckBoyman(Boyman, Timestamp string) error {
-	if Boyman == "test" && Timestamp == "test" { //used for development and testing
-		return nil
-	}
-
-	hasher := md5.New()
-	hasher.Write([]byte(Timestamp + boymanLocalToken))
-	b := hex.EncodeToString(hasher.Sum(nil))
-
-	if b != Boyman {
-		return errors.New("incorrect boyman")
-	}
-
-	err := s.repo.BoymanExists(Timestamp)
-
-	if err == nil {
-		s.repo.InsertBoyman(Timestamp, Boyman)
-	}
-
-	return err
 }
 
 func (s *UnauthedService) GetUserByPhone(Phone string) (*model.User, error) {

@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"zebra/model"
+	"zebra/utils"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"gopkg.in/mgo.v2/bson"
@@ -29,10 +30,11 @@ func (r *UnauthMongo) CreateUser(user model.ReqUserRegistration) error {
 	newUser.PushToken = user.PushToken
 	newUser.Username = user.Username
 	newUser.Preference = user.Preference
-	newUser.Type = user.Type
+	newUser.Type = utils.TypeUser
 	newUser.SelectedOrganization = user.SelectedOrganization
 	newUser.Password = user.Password
 	newUser.PhoneNumber = user.PhoneNumber
+	newUser.Name = user.Name
 
 	// TODO: if googleAvatar is empty, set default random image
 
@@ -48,7 +50,7 @@ func (r *UnauthMongo) SetPushToken(email string, pushToken string) error {
 	col := r.db.Collection("users")
 	_, err := col.UpdateOne(
 		context.TODO(),
-		bson.M{"email": email},
+		bson.M{"username": email},
 		bson.M{"$set": bson.M{
 			"pushToken": pushToken,
 		}})
