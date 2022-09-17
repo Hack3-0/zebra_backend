@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"log"
 	"net/http"
 	"zebra/model"
 
@@ -26,7 +27,10 @@ func (h *Handler) signUpOrg(c *gin.Context) {
 		return
 	}
 	reqOrg.ID = id
+	log.Printf("id %v", id)
 	err = h.services.Admin.CreateOrg(reqOrg)
+	log.Printf("req %v", reqOrg)
+
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

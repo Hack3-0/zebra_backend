@@ -55,3 +55,20 @@ func (h *Handler) makeOrder(c *gin.Context) {
 
 	sendSuccess(c)
 }
+
+func (h *Handler) changeOrderStatus(c *gin.Context) {
+	var ReqID model.ReqID
+	err := ReqID.ParseRequest(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	err = h.services.Order.ChangeOrderStatus(ReqID.ID)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	sendSuccess(c)
+}

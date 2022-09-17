@@ -1,6 +1,11 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"strconv"
+	"zebra/model"
+
+	"github.com/gin-gonic/gin"
+)
 
 func (h *Handler) getUser(c *gin.Context) {
 	id, err := getUserId(c)
@@ -38,4 +43,33 @@ func (h *Handler) changeOrganization(c *gin.Context) {
 	}
 
 	sendSuccess(c)
+}
+
+func (h *Handler) getUserInfo(c *gin.Context) {
+	keys := c.Request.URL.Query()["id"]
+	id, err := strconv.Atoi(keys[0])
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	user, err := h.services.User.GetUserByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	orders, err := h.services.User.GetUserOrders(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	type UserAllInfo struct {
+		User   *model.User    `json:"user"`
+		Orders []*model.Order `json:"orders"`
+	}
+
+	info := UserAllInfo{user, orders}
+
+	sendGeneral(info, c)
+
 }

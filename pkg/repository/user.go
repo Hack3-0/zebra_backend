@@ -51,3 +51,23 @@ func (s *UserMongo) ChangeOrganization(id, orgID int) error {
 
 	return nil
 }
+
+func (s *UserMongo) GetUserOrders(id int) ([]*model.Order, error) {
+	col := s.db.Collection(collectionOrders)
+	var orders []*model.Order
+
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"userID": id},
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &orders); err != nil {
+		return nil, err
+	}
+
+	return orders, nil
+}

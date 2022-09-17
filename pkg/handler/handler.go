@@ -33,9 +33,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		authed.POST("/startSession", h.startSession)
 		authed.POST("/endSession", h.endSession)
 		authed.POST("/makeOrder", h.makeOrder)
-		//authed.POST("/changeOrderStatus", h.changeOrderStatus)
+		authed.POST("/changeOrderStatus", h.changeOrderStatus)
 		authed.GET("/getUser", h.getUser)
 		authed.POST("/changeOrganization", h.changeOrganization)
+		authed.GET("/getUserInfo", h.getUserInfo)
 		admin := authed.Group("/admin", h.adminIdentity)
 		{
 			admin.POST("/signup", h.signUpCash)

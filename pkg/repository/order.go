@@ -79,3 +79,18 @@ func (s *OrderMongo) GetNewOrderID() (int, error) {
 
 	return newId, nil
 }
+
+func (s *OrderMongo) ChangeOrderStatus(id int) error {
+	col := s.db.Collection(collectionOrders)
+	_, err := col.UpdateOne(
+		context.TODO(),
+		bson.M{"id": id},
+		bson.M{"$set": bson.M{"status": utils.Complete}},
+	)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

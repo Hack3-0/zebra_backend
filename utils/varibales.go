@@ -7,4 +7,5 @@ const (
 	TypeAdmin     = "admin"
 	TypeHeadAdmin = "headAdmin"
 	Pending       = "pending"
+	Complete      = "complete"
 )

@@ -38,12 +38,14 @@ type Cashier interface {
 type User interface {
 	GetUserByID(id int) (*model.User, error)
 	ChangeOrganization(id, orgID int) error
+	GetUserOrders(id int) ([]*model.Order, error)
 }
 
 type Order interface {
 	CreateOrder(data model.ReqOrder) error
 	GetOrderByID(id int) (*model.Order, error)
 	GetNewOrderID() (int, error)
+	ChangeOrderStatus(id int) error
 }
 type Service struct {
 	Unauthed
