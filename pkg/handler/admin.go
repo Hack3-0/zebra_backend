@@ -4,11 +4,11 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"strconv"
 	"zebra/model"
 	"zebra/utils"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
 )
 
 func (h *Handler) signUpOrg(c *gin.Context) {
@@ -64,10 +64,23 @@ func (h *Handler) createMenuItem(c *gin.Context) {
 		return
 	}
 	var menuItem model.MenuItem
-	if err := c.ShouldBindWith(&menuItem, binding.JSON); err != nil {
-		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))
+	menuItem.Name = c.Request.FormValue("name")
+	menuItem.Description = c.Request.FormValue("name")
+	menuItem.Category = c.Request.FormValue("name")
+	menuItem.Price, err = strconv.Atoi(c.Request.FormValue("name"))
+	if err != nil {
+		defaultErrorHandler(c, err)
 		return
 	}
+
+	discount, err := strconv.ParseFloat(c.Request.FormValue("name"), 32)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	menuItem.Discount = float32(discount)
+	menuItem.HasSuggar = (c.Request.FormValue("name") == "true")
+
 	id, err := h.services.Menu.GetNewMenuItemID()
 	if err != nil {
 		defaultErrorHandler(c, err)
