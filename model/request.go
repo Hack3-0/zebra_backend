@@ -128,6 +128,9 @@ func (p *ReqOrgRegistration) ParseRequest(c *gin.Context) error {
 	return nil
 }
 
+type ReqMenu struct {
+}
+
 type ReqCashRegistration struct {
 	ID             int
 	Token          string
@@ -165,10 +168,10 @@ func (p *ReqUserLogin) ParseRequest(c *gin.Context) error {
 
 type ReqOrder struct {
 	ID             int
-	UserID         int   `json:"userID" bson:"userID"`
-	CashierID      int   `json:"cashierID" bson:"cashierID"`
-	OrganizationID int   `json:"organizationID" bson:"organizationID"`
-	Items          []int `json:"items" bson:"items"`
+	UserID         int         `json:"userID" bson:"userID"`
+	CashierID      int         `json:"cashierID" bson:"cashierID"`
+	OrganizationID int         `json:"organizationID" bson:"organizationID"`
+	Items          []*MenuItem `json:"items" bson:"items"`
 	Status         string
 	Time           time.Time // can add start time and end time to check average completion time
 }

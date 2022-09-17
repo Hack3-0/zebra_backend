@@ -5,8 +5,10 @@ import (
 	"log"
 	"net/http"
 	"zebra/model"
+	"zebra/utils"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 func (h *Handler) signUpOrg(c *gin.Context) {
@@ -53,4 +55,37 @@ func (h *Handler) getOrganizations(c *gin.Context) {
 	}
 
 	sendGeneral(organizations, c)
+}
+
+func (h *Handler) createMenuItem(c *gin.Context) {
+	imageName, err := utils.CreateMenuItemImageImage(c)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	var menuItem model.MenuItem
+	if err := c.ShouldBindWith(&menuItem, binding.JSON); err != nil {
+		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))
+		return
+	}
+	id, err := h.services.Menu.GetNewMenuItemID()
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	menuItem.ID = id
+	menuItem.Image = imageName
+	err = h.services.Menu.CreateMenuItem(menuItem)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	newMenuItem, err := h.services.Menu.GetMenuItemByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	sendGeneral(newMenuItem, c)
 }

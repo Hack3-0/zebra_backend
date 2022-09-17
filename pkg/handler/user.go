@@ -73,3 +73,12 @@ func (h *Handler) getUserInfo(c *gin.Context) {
 	sendGeneral(info, c)
 
 }
+
+func (h *Handler) getMenu(c *gin.Context) {
+	menu, err := h.services.Menu.GetMenu()
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	sendGeneral(menu, c)
+}

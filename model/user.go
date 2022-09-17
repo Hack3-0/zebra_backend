@@ -28,6 +28,5 @@ type User struct {
 type Preference struct {
 	Sugar      bool  `json:"sugar" bson:"sugar"`
 	CoffeeType []int `json:"coffeeType" bson:"coffeeType"`
-	Snack      []int `json:"snack" bson:"snack"`
 	Milk       []int `json:"milk" bson:"milk"`
 }

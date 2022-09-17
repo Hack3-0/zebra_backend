@@ -30,6 +30,13 @@ type PushNotification interface {
 	GetShortUser(TakerID, SenderID int) (*model.ShortUserSuggest, error)*/
 }
 
+type Menu interface {
+	CreateMenuItem(data model.MenuItem) error
+	GetMenuItemByID(id int) (*model.MenuItem, error)
+	GetMenu() ([]*model.MenuItem, error)
+	GetNewMenuItemID() (int, error)
+}
+
 type User interface {
 	GetUserByID(id int) (*model.User, error)
 	ChangeOrganization(id, orgID int) error
@@ -65,7 +72,7 @@ type Repository struct {
 	PushNotification
 	Cashier
 	Order
-
+	Menu
 	//LocalNotification
 }
 
@@ -78,5 +85,6 @@ func NewRepository(db *mongo.Database) *Repository {
 		Admin:            NewAdminMongo(db),
 		Cashier:          NewCashierMongo(db),
 		Order:            NewOrderMongo(db),
+		Menu:             NewMenuMongo(db),
 	}
 }

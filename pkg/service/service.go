@@ -41,6 +41,13 @@ type User interface {
 	GetUserOrders(id int) ([]*model.Order, error)
 }
 
+type Menu interface {
+	CreateMenuItem(data model.MenuItem) error
+	GetMenuItemByID(id int) (*model.MenuItem, error)
+	GetMenu() ([]*model.MenuItem, error)
+	GetNewMenuItemID() (int, error)
+}
+
 type Order interface {
 	CreateOrder(data model.ReqOrder) error
 	GetOrderByID(id int) (*model.Order, error)
@@ -53,6 +60,7 @@ type Service struct {
 	Admin
 	Cashier
 	Order
+	Menu
 }
 
 func NewService(repos *repository.Repository, fcmService *fcmService.FcmService) *Service {
@@ -62,5 +70,6 @@ func NewService(repos *repository.Repository, fcmService *fcmService.FcmService)
 		Admin:    NewAdminService(repos.Admin),
 		Cashier:  NewCashierService(repos.Cashier),
 		Order:    NewOrderService(repos.Order),
+		Menu:     NewMenuService(repos.Menu),
 	}
 }
