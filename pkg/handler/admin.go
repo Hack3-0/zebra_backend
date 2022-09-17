@@ -65,21 +65,21 @@ func (h *Handler) createMenuItem(c *gin.Context) {
 	}
 	var menuItem model.MenuItem
 	menuItem.Name = c.Request.FormValue("name")
-	menuItem.Description = c.Request.FormValue("name")
-	menuItem.Category = c.Request.FormValue("name")
-	menuItem.Price, err = strconv.Atoi(c.Request.FormValue("name"))
+	menuItem.Description = c.Request.FormValue("description")
+	menuItem.Category = c.Request.FormValue("category")
+	menuItem.Price, err = strconv.Atoi(c.Request.FormValue("price"))
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
 
-	discount, err := strconv.ParseFloat(c.Request.FormValue("name"), 32)
+	discount, err := strconv.ParseFloat(c.Request.FormValue("discount"), 32)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
 	menuItem.Discount = float32(discount)
-	menuItem.HasSuggar = (c.Request.FormValue("name") == "true")
+	menuItem.HasSuggar = (c.Request.FormValue("hasSugar") == "true")
 
 	id, err := h.services.Menu.GetNewMenuItemID()
 	if err != nil {
