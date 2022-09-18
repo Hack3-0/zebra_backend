@@ -14,6 +14,7 @@ func NewMenuService(repo repository.Menu) *MenuService {
 }
 
 func (s *MenuService) CreateMenuItem(data model.MenuItem) error {
+	data.Hide = false
 	err := s.repo.CreateMenuItem(data)
 	if err != nil {
 		return err

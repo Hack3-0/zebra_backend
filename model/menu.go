@@ -9,4 +9,5 @@ type MenuItem struct {
 	Discount    float32 `json:"discount" bson:"discount"`
 	HasSuggar   bool    `json:"hasSugar" bson:"hasSugar"`
 	Image       string  `json:"image" bson:"image"`
+	Hide        bool    `json:"hide" bson:"hide"`
 }

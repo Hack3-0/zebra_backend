@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+	"log"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -182,8 +183,10 @@ func (p *ReqOrder) ParseRequest(c *gin.Context) error {
 	}
 
 	if p.UserID == 0 || p.OrganizationID == 0 || len(p.Items) == 0 {
+		log.Print(p.UserID, p.OrganizationID, p.Items)
 		return errors.New("bad request | empty fields")
 	}
+
 	return nil
 }
 

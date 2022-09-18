@@ -37,7 +37,7 @@ func (s *MenuMongo) GetMenu() ([]*model.MenuItem, error) {
 	var menu []*model.MenuItem
 	cursor, err := collection.Find(
 		context.TODO(),
-		bson.M{},
+		bson.M{"hide": false},
 	)
 
 	if err != nil {
@@ -97,7 +97,7 @@ func (s *MenuMongo) GetMenuCategory(category string) ([]*model.MenuItem, error) 
 	var menu []*model.MenuItem
 	cursor, err := col.Find(
 		context.TODO(),
-		bson.M{"category": category},
+		bson.M{"category": category, "hide": false},
 	)
 	if err != nil {
 		return nil, err
@@ -116,15 +116,16 @@ func (s *MenuMongo) GetMenuCategory(category string) ([]*model.MenuItem, error) 
 func (s *MenuMongo) DeleteMenuItem(id int) error {
 	col := s.db.Collection(collectionMenu)
 
-	res, err := col.DeleteOne(
+	res, err := col.UpdateOne(
 		context.TODO(),
 		bson.M{"id": id},
+		bson.M{"$set": bson.M{"hide": true}},
 	)
 	if err != nil {
 		return err
 	}
 
-	if res.DeletedCount == 0 {
+	if res.UpsertedCount == 0 {
 		return errors.New("not found")
 	}
 	return nil
