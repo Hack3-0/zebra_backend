@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -17,6 +18,7 @@ const (
 
 func (h *Handler) userIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
+	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 	header := c.GetHeader(authorizationHeader)
 	if header == "" {
 		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
@@ -48,7 +50,9 @@ func (h *Handler) userIdentity(c *gin.Context) {
 }
 
 func getUserId(c *gin.Context) (int, error) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Origin", "*")
+	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
+
 	id, ok := c.Get(userCtx)
 	if !ok {
 		return 0, errors.New("user id not found")
@@ -63,7 +67,8 @@ func getUserId(c *gin.Context) (int, error) {
 }
 
 func (h *Handler) adminIdentity(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Origin", "*")
+	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
 	if !ok {
@@ -84,7 +89,9 @@ func (h *Handler) adminIdentity(c *gin.Context) {
 }
 
 func (h *Handler) headAdminIdentity(c *gin.Context) {
-	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Origin", "*")
+	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
+
 	id, ok := c.Get(userCtx)
 	if !ok {
 		newErrorResponse(c, http.StatusUnauthorized, errors.New("user id not found").Error())
