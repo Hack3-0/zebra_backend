@@ -129,19 +129,3 @@ func (h *Handler) getCashiers(c *gin.Context) {
 	}
 	sendGeneral(cashiers, c)
 }
-
-func (h *Handler) getAllCashiers(c *gin.Context) {
-	id, err := getUserId(c)
-
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
-	}
-
-	cashiers, err := h.services.GetCashiers(id)
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
-	}
-	sendGeneral(cashiers, c)
-}

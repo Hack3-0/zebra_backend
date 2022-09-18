@@ -22,8 +22,24 @@ func (h *StaticHandler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
 	router.GET("getQr/:fileName", h.RouterImageHandler)
-
+	router.GET("menu/:fileName", h.MenuImageHandler)
 	return router
+}
+
+func (h *StaticHandler) MenuImageHandler(c *gin.Context) {
+
+	filename := c.Param("fileName")
+
+	if filename == "" {
+		defaultErrorHandler(c, errors.New("bad request"))
+		return
+	}
+
+	locationPrefix := os.Getenv("LocationMenuItems")
+
+	logrus.Print(locationPrefix + filename)
+
+	c.File(locationPrefix + filename)
 }
 
 func (h *StaticHandler) RouterImageHandler(c *gin.Context) {
