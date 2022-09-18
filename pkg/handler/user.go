@@ -8,8 +8,8 @@ import (
 )
 
 func (h *Handler) getUser(c *gin.Context) {
-	id, err := getUserId(c)
-
+	keys := c.Request.URL.Query()["id"]
+	id, err := strconv.Atoi(keys[0])
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return

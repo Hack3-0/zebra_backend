@@ -45,7 +45,7 @@ func (r *UnauthMongo) CreateUser(user model.ReqUserRegistration) error {
 	newUser.Username = user.Username
 	newUser.Preference = user.Preference
 	newUser.Type = utils.TypeUser
-	newUser.OrganizationID = user.OrganizationID
+	newUser.Organization = user.Organization
 	newUser.Password = user.Password
 	newUser.PhoneNumber = user.PhoneNumber
 	newUser.Name = user.Name
