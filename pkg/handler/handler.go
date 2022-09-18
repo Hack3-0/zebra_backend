@@ -24,7 +24,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	unauthed := router.Group("/unauthed")
 	{
-
 		unauthed.POST("/signup", h.signUp)
 		unauthed.POST("/signin", h.signIn)
 		unauthed.POST("/getOrganizations", h.getOrganizations)
@@ -36,7 +35,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	authed := router.Group("/authed", h.userIdentity)
 	{
-
+		authed.Use(cors.Default())
 		authed.POST("/startSession", h.startSession)
 		authed.POST("/endSession", h.endSession)
 		authed.POST("/makeOrder", h.makeOrder)
@@ -46,7 +45,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		authed.GET("/getUserInfo", h.getUserInfo)
 		admin := authed.Group("/admin", h.adminIdentity)
 		{
-
+			admin.Use(cors.Default())
 			admin.POST("/signup", h.signUpCash)
 			admin.POST("/getCashiers", h.getCashiers)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
