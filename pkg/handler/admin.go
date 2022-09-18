@@ -136,22 +136,22 @@ func (h *Handler) getStatistics(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-	/*
-		if id == 0 {
-			statistics, err := h.services.Admin.
-			if err != nil {
-				defaultErrorHandler(c, err)
-				return
-			}
-			sendGeneral(statistics, c)
-		} else {
-			statistics, err := h.services.Admin.getStatistics(id, reqTime.TimeStamp)
-			if err != nil {
-				defaultErrorHandler(c, err)
-				return
-			}
-			sendGeneral(statistics, c)
-		}*/
+
+	if id == 0 {
+		statistics, err := h.services.Admin.GetAllStatistics(reqTime.TimeStamp)
+		if err != nil {
+			defaultErrorHandler(c, err)
+			return
+		}
+		sendGeneral(statistics, c)
+	} else {
+		statistics, err := h.services.Admin.GetStatistics(id, reqTime.TimeStamp)
+		if err != nil {
+			defaultErrorHandler(c, err)
+			return
+		}
+		sendGeneral(statistics, c)
+	}
 	return
 
 }
