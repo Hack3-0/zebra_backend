@@ -134,7 +134,7 @@ func (s *MenuMongo) DeleteMenuItem(id int) error {
 func (s *MenuMongo) UpdateMenuItem(menu *model.MenuItem) error {
 	col := s.db.Collection(collectionMenu)
 
-	res, err := col.UpdateOne(
+	_, err := col.UpdateOne(
 		context.TODO(),
 		bson.M{"id": menu.ID},
 		bson.M{"$set": menu},
@@ -143,8 +143,5 @@ func (s *MenuMongo) UpdateMenuItem(menu *model.MenuItem) error {
 		return err
 	}
 
-	if res.UpsertedCount == 0 {
-		return errors.New("not found")
-	}
 	return nil
 }

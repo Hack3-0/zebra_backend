@@ -40,16 +40,13 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 	}
 	log.Print(first)
 	menuItem.ID = id
-	if c.Request.FormValue("image") != "" {
-		imageName, err := utils.CreateMenuItemImageImage(c)
-		if err != nil {
-			defaultErrorHandler(c, err)
-			return
-		}
-		menuItem.Image = imageName
-	} else {
-		menuItem.Image = first.Image
+	imageName, err := utils.CreateMenuItemImageImage(c)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
 	}
+	menuItem.Image = imageName
+
 	if c.Request.FormValue("name") == "" {
 		menuItem.Name = first.Name
 	}
