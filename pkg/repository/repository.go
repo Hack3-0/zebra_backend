@@ -60,6 +60,7 @@ type Cashier interface {
 	UpdateWorkHours(id int, sessionDuration float32) error
 	EndSession(id, orgID int) error
 	GetCashiers(id int) ([]*model.Cashier, error)
+	UpdateSession()
 }
 
 type Order interface {
