@@ -133,20 +133,30 @@ func (s *AdminMongo) AddCashier(id, newID int) error {
 
 func (s *AdminMongo) CreateHeadAdmin(token, password, username, userType string) error {
 	col := s.db.Collection(collectionUser)
-	headAdmin := model.User{
-		ID:       0,
-		Token:    token,
-		Password: password,
-		Username: username,
-		Type:     userType,
-	}
-
-	_, err := col.InsertOne(
+	res, err := col.CountDocuments(
 		context.TODO(),
-		headAdmin,
+		bson.M{"id": 0},
 	)
 	if err != nil {
 		return err
 	}
+	if res == 0 {
+		headAdmin := model.User{
+			ID:       0,
+			Token:    token,
+			Password: password,
+			Username: username,
+			Type:     userType,
+		}
+
+		_, err := col.InsertOne(
+			context.TODO(),
+			headAdmin,
+		)
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
