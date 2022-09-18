@@ -17,6 +17,8 @@ const (
 )
 
 func (h *Handler) userIdentity(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
 	log.Print(1)
 	log.Print(c.GetHeader("Access-Control-Allow-Origin"))
 	header := c.GetHeader(authorizationHeader)
@@ -50,6 +52,8 @@ func (h *Handler) userIdentity(c *gin.Context) {
 }
 
 func getUserId(c *gin.Context) (int, error) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
 	id, ok := c.Get(userCtx)
 	if !ok {
 		return 0, errors.New("user id not found")
@@ -64,6 +68,8 @@ func getUserId(c *gin.Context) (int, error) {
 }
 
 func (h *Handler) adminIdentity(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+
 	log.Print(2)
 	id, ok := c.Get(userCtx)
 	if !ok {
@@ -84,6 +90,7 @@ func (h *Handler) adminIdentity(c *gin.Context) {
 }
 
 func (h *Handler) headAdminIdentity(c *gin.Context) {
+	c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 	log.Print(3)
 	id, ok := c.Get(userCtx)
 	if !ok {
