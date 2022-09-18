@@ -66,15 +66,27 @@ func main() {
 
 	srv := new(zebra.Server)
 	staticSrv := new(zebra.Server)
-
-	logrus.Print("Server Runing on Dev mode")
-	go func() {
-		if err := srv.Run(os.Getenv("APIPortHTTP"), handlers.InitRoutes()); err != nil {
+	log.Print(os.Getenv("LocationCertificate"))
+	if os.Getenv("LocationCertificate") != "" {
+		logrus.Print("Server Runing on Production mode")
+		go func() {
+			if err := srv.RunTLS(os.Getenv("APIPortHTTP"), os.Getenv("LocationCertificate")+"asletix_com.pem", os.Getenv("LocationCertificate")+"asletix.key", handlers.InitRoutes()); err != nil {
+				logrus.Fatalf("error occured while running http server: %s", err.Error())
+			}
+		}()
+		if err := staticSrv.RunTLS(os.Getenv("StaticPortHTTP"), os.Getenv("LocationCertificate")+"asletix_com.pem", os.Getenv("LocationCertificate")+"asletix.key", staticHandler.InitRoutes()); err != nil {
 			logrus.Fatalf("error occured while running http server: %s", err.Error())
 		}
-	}()
-	if err := staticSrv.Run(os.Getenv("StaticPortHTTP"), staticHandler.InitRoutes()); err != nil {
-		logrus.Fatalf("error occured while running http server: %s", err.Error())
+	} else {
+		logrus.Print("Server Runing on Dev mode")
+		go func() {
+			if err := srv.Run(os.Getenv("APIPortHTTP"), handlers.InitRoutes()); err != nil {
+				logrus.Fatalf("error occured while running http server: %s", err.Error())
+			}
+		}()
+		if err := staticSrv.Run(os.Getenv("StaticPortHTTP"), staticHandler.InitRoutes()); err != nil {
+			logrus.Fatalf("error occured while running http server: %s", err.Error())
+		}
 	}
 
 }
