@@ -30,18 +30,163 @@
                 ]
         },
         {
-                "insert": "menuItems",
+                "insert": "menu",
                 "documents":[
                         {
                                 "id" : 1,
-                                "name" : "Latte",
-                                "description":"Vkusni",
+                                "name" : "Ice Latte",
+                                "description":"lorem ipsum",
                                 "category" : "coffee",
                                 "price" : 950,
+                                "cost" : 665,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id" : 2,
+                                "name" : "Americano",
+                                "description":"lorem Ipsum",
+                                "category" : "coffee",
+                                "price" : 700,
+                                "cost" : 490,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id" : 3,
+                                "name" : "Raf",
+                                "description":"lorem Ipsum",
+                                "category" : "coffee",
+                                "price" : 950,
+                                "cost":665,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id" : 4,
+                                "name" : "Cappucino",
+                                "description":"lorem Ipsum",
+                                "category" : "coffee",
+                                "price" : 790,
+                                "cost" : 553,
                                 "discount":0.15,
                                 "hasSugar":true,
                                 "image":"none"
+                        },
+                        {
+                                "id":5,
+                                "name" : "Latte Green Matcha",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 850,
+                                "cost" : 595,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":6,
+                                "name" : "Ice Tea Blue Match",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 850,
+                                "cost" : 595,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":7,
+                                "name" : "Hot Chocolate",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 750,
+                                "cost" : 525,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":8,
+                                "name" : "Tea Shipovnik",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 750,
+                                "cost" : 525,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":9,
+                                "name" : "Strawberry Cocktail",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 800,
+                                "cost" : 560,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":10,
+                                "name" : "Banana Cocktail",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 800,
+                                "cost" : 560,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":11,
+                                "name" : "Tropic Lemonade",
+                                "description":"lorem Ipsum",
+                                "category" : "drink",
+                                "price" : 750,
+                                "cost" : 525,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":12,
+                                "name" : "Moty",
+                                "description":"lorem Ipsum",
+                                "category" : "snack",
+                                "price" : 1100,
+                                "cost" : 770,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":13,
+                                "name" : "Chicken croissant",
+                                "description":"lorem Ipsum",
+                                "category" : "snack",
+                                "price" : 1190,
+                                "cost" : 830,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":14,
+                                "name" : "Salmon croissant",
+                                "description":"lorem Ipsum",
+                                "category" : "snack",
+                                "price" : 1490,
+                                "cost" : 1043,
+                                "discount":0,
+                                "hasSugar":true,
+                                "image":"none"
                         }
+
                 ]
         }
 ]

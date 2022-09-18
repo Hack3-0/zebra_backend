@@ -28,17 +28,18 @@ func (h *Handler) signUp(c *gin.Context) {
 		return
 	}
 	log.Print(reqUser.Username)
+	if reqUser.PhoneNumber != "" {
+		user, err := h.services.Unauthed.GetUserByPhone(reqUser.PhoneNumber)
+		if err != nil && err.Error() != "mongo: no documents in result" {
+			defaultErrorHandler(c, err)
+			return
+		}
+		log.Print(reqUser.PhoneNumber)
 
-	user, err := h.services.Unauthed.GetUserByPhone(reqUser.PhoneNumber)
-	if err != nil && err.Error() != "mongo: no documents in result" {
-		defaultErrorHandler(c, err)
-		return
-	}
-	log.Print(reqUser.PhoneNumber)
-
-	if user != nil {
-		defaultErrorHandler(c, errors.New("phone number is already taken"))
-		return
+		if user != nil {
+			defaultErrorHandler(c, errors.New("phone number is already taken"))
+			return
+		}
 	}
 
 	err = h.services.Unauthed.CreateUser(reqUser)
