@@ -112,7 +112,7 @@ func (s *CashierMongo) StartSession(id, orgID int) error {
 	_, err = col.UpdateOne(
 		context.TODO(),
 		bson.M{"id": id},
-		bson.M{"$set": bson.M{"startTime": time.Now()}},
+		bson.M{"$set": bson.M{"startTime": time.Now(), "active": true}},
 	)
 	if err != nil {
 		return err
@@ -134,4 +134,68 @@ func (s *CashierMongo) UpdateWorkHours(id int, sessionDuration float32) error {
 	}
 
 	return nil
+}
+
+func (s *CashierMongo) EndSession(id, orgID int) error {
+	col := s.db.Collection(collectionUser)
+
+	_, err := col.UpdateOne(
+		context.TODO(),
+		bson.M{"id": orgID},
+		bson.M{"$set": bson.M{"active": 0}},
+	)
+	if err != nil {
+		return err
+	}
+	_, err = col.UpdateOne(
+		context.TODO(),
+		bson.M{"id": id},
+		bson.M{"$set": bson.M{"endTime": time.Now(), "active": false}},
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (s *CashierMongo) UpdateSession() {
+	col := s.db.Collection(collectionUser)
+	for {
+		time.Sleep(time.Hour)
+		if time.Now().Hour() >= 0 && time.Now().Hour() < 2 {
+			_, err := col.UpdateMany(
+				context.TODO(),
+				bson.M{"type": utils.TypeCashier},
+				bson.M{"$set": bson.M{"startTime": nil, "endTime": nil}},
+			)
+			if err != nil {
+				log.Print(err)
+			}
+		}
+	}
+}
+
+func (s *CashierMongo) GetCashiers(id int) ([]*model.Cashier, error) {
+	col := s.db.Collection(collectionUser)
+	var cashiers []*model.Cashier
+
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"type": utils.TypeCashier, "organizationID": id},
+	)
+	if id == 0 {
+		cursor, err = col.Find(
+			context.TODO(),
+			bson.M{"type": utils.TypeCashier},
+		)
+	}
+	if err != nil {
+		return nil, err
+	}
+	if err := cursor.All(context.TODO(), &cashiers); err != nil {
+		return nil, err
+	}
+
+	return cashiers, nil
 }

@@ -35,6 +35,7 @@ type Menu interface {
 	GetMenuItemByID(id int) (*model.MenuItem, error)
 	GetMenu() ([]*model.MenuItem, error)
 	GetNewMenuItemID() (int, error)
+	GetMenuCategory(category string) ([]*model.MenuItem, error)
 }
 
 type User interface {
@@ -57,6 +58,8 @@ type Cashier interface {
 	GetCashByUsername(username string) (*model.Cashier, error)
 	StartSession(id, orgID int) error
 	UpdateWorkHours(id int, sessionDuration float32) error
+	EndSession(id, orgID int) error
+	GetCashiers(id int) ([]*model.Cashier, error)
 }
 
 type Order interface {

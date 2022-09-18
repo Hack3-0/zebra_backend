@@ -100,16 +100,48 @@ func (h *Handler) endSession(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-	err = h.services.Cashier.UpdateWorkHours(id, cashier.StartTime)
+	err = h.services.Cashier.UpdateWorkHours(id, *cashier.StartTime)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
 
-	err = h.services.Cashier.StartSession(0, cashier.OrganizationID)
+	err = h.services.Cashier.EndSession(id, cashier.OrganizationID)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
 	sendSuccess(c)
+}
+
+func (h *Handler) getCashiers(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	cashiers, err := h.services.GetCashiers(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	sendGeneral(cashiers, c)
+}
+
+func (h *Handler) getAllCashiers(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	cashiers, err := h.services.GetCashiers(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	sendGeneral(cashiers, c)
 }

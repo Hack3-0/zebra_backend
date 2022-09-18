@@ -28,6 +28,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		unauthed.POST("/signin", h.signIn)
 		unauthed.POST("/getOrganizations", h.getOrganizations)
 		unauthed.GET("/getMenu", h.getMenu)
+		unauthed.POST("/getMenuCategory", h.getMenuCategory)
+
 	}
 	//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0NDEyMzcsInVzZXJJZCI6M30.2nL_PBWJ7MXZia6Q0e9xdMuysk3ijkY5J1yL_FKRgZE
 
@@ -43,6 +45,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		admin := authed.Group("/admin", h.adminIdentity)
 		{
 			admin.POST("/signup", h.signUpCash)
+			admin.POST("/getCashiers", h.getCashiers)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
 			{
 				headAdmin.POST("/signup", h.signUpOrg)

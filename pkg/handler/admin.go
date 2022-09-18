@@ -9,6 +9,7 @@ import (
 	"zebra/utils"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 func (h *Handler) signUpOrg(c *gin.Context) {
@@ -102,4 +103,21 @@ func (h *Handler) createMenuItem(c *gin.Context) {
 	}
 
 	sendGeneral(newMenuItem, c)
+}
+
+func (h *Handler) getMenuCategory(c *gin.Context) {
+	type ReqCategory struct {
+		Category string `json:"category" bson:"category"`
+	}
+	var category ReqCategory
+	if err := c.ShouldBindWith(&category, binding.JSON); err != nil {
+		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))
+	}
+	menu, err := h.services.Menu.GetMenuCategory(category.Category)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	sendGeneral(menu, c)
 }

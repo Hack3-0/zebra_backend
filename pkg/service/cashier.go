@@ -59,3 +59,18 @@ func (s *CashierService) UpdateWorkHours(id int, startTime time.Time) error {
 	sessionDuration := float32(now.Hour()-startTime.Hour()) + float32(now.Minute()-startTime.Minute())/60
 	return s.repo.UpdateWorkHours(id, sessionDuration)
 }
+
+func (s *CashierService) EndSession(id, orgID int) error {
+	return s.repo.EndSession(id, orgID)
+}
+
+func (s *CashierService) GetCashiers(id int) ([]*model.Cashier, error) {
+	cashiers, err := s.repo.GetCashiers(id)
+	if err != nil {
+		return nil, err
+	}
+	if len(cashiers) == 0 {
+		cashiers = []*model.Cashier{}
+	}
+	return cashiers, nil
+}

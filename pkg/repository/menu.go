@@ -90,3 +90,24 @@ func (s *MenuMongo) GetNewMenuItemID() (int, error) {
 
 	return newId, nil
 }
+
+func (s *MenuMongo) GetMenuCategory(category string) ([]*model.MenuItem, error) {
+	col := s.db.Collection(collectionMenu)
+	var menu []*model.MenuItem
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"category": category},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &menu); err != nil {
+		return nil, err
+	}
+
+	if len(menu) == 0 {
+		menu = []*model.MenuItem{}
+	}
+	return menu, nil
+}
