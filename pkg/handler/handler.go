@@ -20,8 +20,6 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.Use(cors.Default())
-
 	unauthed := router.Group("/unauthed")
 	{
 		unauthed.Use(cors.Default())
@@ -36,7 +34,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 
 	authed := router.Group("/authed", h.userIdentity)
 	{
-		authed.Use(cors.Default())
 		authed.POST("/startSession", h.startSession)
 		authed.POST("/endSession", h.endSession)
 		authed.POST("/makeOrder", h.makeOrder)
@@ -46,12 +43,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		authed.GET("/getUserInfo", h.getUserInfo)
 		admin := authed.Group("/admin", h.adminIdentity)
 		{
-			admin.Use(cors.Default())
 			admin.POST("/signup", h.signUpCash)
 			admin.POST("/getCashiers", h.getCashiers)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
 			{
-				headAdmin.Use(cors.Default())
+				headAdmin.POST("/deleteMenuItem", h.deleteMenuItem)
+				headAdmin.POST("/updateMenuItem", h.updateMenuItem)
 				headAdmin.POST("/signup", h.signUpOrg)
 				headAdmin.POST("/createMenuItem", h.createMenuItem)
 			}

@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"errors"
 	"zebra/model"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -110,4 +111,39 @@ func (s *MenuMongo) GetMenuCategory(category string) ([]*model.MenuItem, error) 
 		menu = []*model.MenuItem{}
 	}
 	return menu, nil
+}
+
+func (s *MenuMongo) DeleteMenuItem(id int) error {
+	col := s.db.Collection(collectionMenu)
+
+	res, err := col.DeleteOne(
+		context.TODO(),
+		bson.M{"id": id},
+	)
+	if err != nil {
+		return err
+	}
+
+	if res.DeletedCount == 0 {
+		return errors.New("not found")
+	}
+	return nil
+}
+
+func (s *MenuMongo) UpdateMenuItem(menu *model.MenuItem) error {
+	col := s.db.Collection(collectionMenu)
+
+	res, err := col.UpdateOne(
+		context.TODO(),
+		bson.M{"id": menu.ID},
+		menu,
+	)
+	if err != nil {
+		return err
+	}
+
+	if res.UpsertedCount == 0 {
+		return errors.New("not found")
+	}
+	return nil
 }

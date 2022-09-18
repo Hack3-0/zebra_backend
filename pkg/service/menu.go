@@ -46,3 +46,11 @@ func (s *MenuService) GetNewMenuItemID() (int, error) {
 func (s *MenuService) GetMenuCategory(category string) ([]*model.MenuItem, error) {
 	return s.repo.GetMenuCategory(category)
 }
+
+func (s *MenuService) DeleteMenuItem(id int) error {
+	return s.repo.DeleteMenuItem(id)
+}
+
+func (s *MenuService) UpdateMenuItem(menu *model.MenuItem) error {
+	return s.repo.UpdateMenuItem(menu)
+}

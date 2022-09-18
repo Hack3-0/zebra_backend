@@ -36,6 +36,7 @@ type Menu interface {
 	GetMenu() ([]*model.MenuItem, error)
 	GetNewMenuItemID() (int, error)
 	GetMenuCategory(category string) ([]*model.MenuItem, error)
+	DeleteMenuItem(id int) error
 }
 
 type User interface {
