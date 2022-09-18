@@ -18,6 +18,7 @@ type Unauthed interface {
 	InsertBoyman(Timestamp, Boyman string)
 	GetUserByPhone(Phone string) (*model.User, error)
 	GetUserByUsername(Username string) (*model.User, error)
+	GetAllUserByUsername(Username string) (*model.AllUser, error)
 }
 
 type Profile interface {

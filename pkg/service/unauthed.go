@@ -115,3 +115,8 @@ func (s *UnauthedService) GetUserByPhone(Phone string) (*model.User, error) {
 func (s *UnauthedService) GetUserByUsername(Username string) (*model.User, error) {
 	return s.repo.GetUserByUsername(Username)
 }
+
+func (s *UnauthedService) GetAllUserByUsername(Username string) (*model.AllUser, error) {
+	return s.repo.GetAllUserByUsername(Username)
+
+}

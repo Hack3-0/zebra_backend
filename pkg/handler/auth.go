@@ -43,7 +43,7 @@ func (h *Handler) signUp(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	res, err := h.services.GetUserByUsername(reqUser.Username)
+	res, err := h.services.GetAllUserByUsername(reqUser.Username)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

@@ -19,6 +19,20 @@ func NewUnauthMongo(db *mongo.Database) *UnauthMongo {
 	return &UnauthMongo{db: db}
 }
 
+func (r *UnauthMongo) GetAllUserByUsername(Username string) (*model.AllUser, error) {
+	collection := r.db.Collection(collectionUser)
+	var user *model.AllUser
+	err := collection.FindOne(
+		context.TODO(),
+		bson.M{"username": Username},
+	).Decode(&user)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
+}
+
 func (r *UnauthMongo) CreateUser(user model.ReqUserRegistration) error {
 	usersCollection := r.db.Collection(collectionUser)
 

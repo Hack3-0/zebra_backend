@@ -16,6 +16,7 @@ type Unauthed interface {
 	ParseToken(token string) (int, error)
 	GetUserByPhone(Phone string) (*model.User, error)
 	GetUserByUsername(Username string) (*model.User, error)
+	GetAllUserByUsername(Username string) (*model.AllUser, error)
 	//CheckCredentials(Username, Password string) error
 }
 
