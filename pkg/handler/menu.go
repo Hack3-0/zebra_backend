@@ -2,7 +2,6 @@ package handler
 
 import (
 	"errors"
-	"log"
 	"zebra/model"
 	"zebra/utils"
 
@@ -39,13 +38,11 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 		return
 	}
 
-	log.Print(menuItem)
 	menu, err := h.services.GetMenuItemByID(menuItem.ID)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
-	log.Print(menu)
 
 	sendGeneral(menu, c)
 }

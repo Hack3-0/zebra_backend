@@ -167,7 +167,7 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.M
 	var orders []*model.Order
 	cursor, err := col.Find(
 		context.TODO(),
-		bson.M{"time": bson.M{"$gte": timeStamp}, "id": id},
+		bson.M{"time": bson.M{"$gte": timeStamp}, "organizationID": id},
 	)
 	if err != nil {
 		return -1, -1, nil, err
@@ -176,7 +176,7 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.M
 	if err := cursor.All(context.TODO(), &orders); err != nil {
 		return -1, -1, nil, err
 	}
-
+	log.Print(orders)
 	totalRev := 0
 	totalCost := 0
 
