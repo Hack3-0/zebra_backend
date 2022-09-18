@@ -51,6 +51,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			admin.POST("/getCashiers", h.getCashiers)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
 			{
+				headAdmin.Use(cors.Default())
 				headAdmin.POST("/signup", h.signUpOrg)
 				headAdmin.POST("/createMenuItem", h.createMenuItem)
 			}
