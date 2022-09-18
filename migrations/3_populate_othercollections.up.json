@@ -39,7 +39,7 @@
                                 "category" : "coffee",
                                 "price" : 950,
                                 "cost" : 665,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -50,7 +50,7 @@
                                 "category" : "coffee",
                                 "price" : 700,
                                 "cost" : 490,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -61,7 +61,7 @@
                                 "category" : "coffee",
                                 "price" : 950,
                                 "cost":665,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -72,7 +72,7 @@
                                 "category" : "coffee",
                                 "price" : 790,
                                 "cost" : 553,
-                                "discount":0.15,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -83,7 +83,7 @@
                                 "category" : "drink",
                                 "price" : 850,
                                 "cost" : 595,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -94,7 +94,7 @@
                                 "category" : "drink",
                                 "price" : 850,
                                 "cost" : 595,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -105,7 +105,7 @@
                                 "category" : "drink",
                                 "price" : 750,
                                 "cost" : 525,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -116,7 +116,7 @@
                                 "category" : "drink",
                                 "price" : 750,
                                 "cost" : 525,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -127,7 +127,7 @@
                                 "category" : "drink",
                                 "price" : 800,
                                 "cost" : 560,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -138,7 +138,7 @@
                                 "category" : "drink",
                                 "price" : 800,
                                 "cost" : 560,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -149,7 +149,7 @@
                                 "category" : "drink",
                                 "price" : 750,
                                 "cost" : 525,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -160,7 +160,7 @@
                                 "category" : "snack",
                                 "price" : 1100,
                                 "cost" : 770,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -171,7 +171,7 @@
                                 "category" : "snack",
                                 "price" : 1190,
                                 "cost" : 830,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         },
@@ -182,7 +182,7 @@
                                 "category" : "snack",
                                 "price" : 1490,
                                 "cost" : 1043,
-                                "discount":0,
+                                "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
                         }
