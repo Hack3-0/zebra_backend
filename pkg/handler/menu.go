@@ -26,8 +26,18 @@ func (h *Handler) deleteMenuItem(c *gin.Context) {
 }
 
 func (h *Handler) updateMenuItem(c *gin.Context) {
-	var menuItem *model.MenuItem
 
+	var menuItem model.MenuItem
+	id, err := strconv.Atoi(c.Request.FormValue("id"))
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	first, err := h.services.GetMenuItemByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
 	if c.Request.FormValue("image") != "" {
 		imageName, err := utils.CreateMenuItemImageImage(c)
 		if err != nil {
@@ -35,26 +45,43 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 			return
 		}
 		menuItem.Image = imageName
+	} else {
+		menuItem.Image = first.Image
 	}
-	menuItem.Name = c.Request.FormValue("name")
-	menuItem.Description = c.Request.FormValue("description")
-	menuItem.Category = c.Request.FormValue("category")
-	price, err := strconv.Atoi(c.Request.FormValue("price"))
-	menuItem.Price = price
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
+	if c.Request.FormValue("name") == "" {
+		menuItem.Name = first.Name
+	}
+	if c.Request.FormValue("description") == "" {
+		menuItem.Description = first.Description
+	}
+	if c.Request.FormValue("category") == "" {
+		menuItem.Category = first.Category
+	}
+	if c.Request.FormValue("price") == "" {
+		menuItem.Price = first.Price
+	} else {
+		price, err := strconv.Atoi(c.Request.FormValue("price"))
+		if err != nil {
+			defaultErrorHandler(c, err)
+			return
+		}
+		menuItem.Price = price
+
+	}
+	if c.Request.FormValue("discount") == "" {
+		menuItem.Discount = first.Discount
+	} else {
+		discount, err := strconv.ParseFloat(c.Request.FormValue("discount"), 32)
+		if err != nil {
+			defaultErrorHandler(c, err)
+			return
+		}
+		menuItem.Discount = float32(discount)
 	}
 
-	discount, err := strconv.ParseFloat(c.Request.FormValue("discount"), 32)
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
-	}
-	menuItem.Discount = float32(discount)
 	menuItem.HasSuggar = (c.Request.FormValue("hasSugar") == "true")
 
-	err = h.services.Menu.UpdateMenuItem(menuItem)
+	err = h.services.Menu.UpdateMenuItem(&menuItem)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
