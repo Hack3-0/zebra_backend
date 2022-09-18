@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"zebra/model"
+	"zebra/utils"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"gopkg.in/mgo.v2/bson"
@@ -32,12 +33,12 @@ func (s *UserMongo) GetUserByID(id int) (*model.User, error) {
 	return user, nil
 }
 
-func (s *UserMongo) ChangeOrganization(id int, org model.Organization) error {
+func (s *UserMongo) ChangeOrganization(id int, org model.ShortOrganization) error {
 	collection := s.db.Collection(collectionUser)
 
 	res, err := collection.UpdateOne(
 		context.TODO(),
-		bson.M{"id": id},
+		bson.M{"id": id, "type": utils.TypeUser},
 		bson.M{"$set": bson.M{"organization": org}},
 	)
 

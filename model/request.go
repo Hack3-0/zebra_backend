@@ -87,13 +87,13 @@ func (p *ReqFeedLikedUsers) ParseRequest(c *gin.Context) error {
 type ReqUserRegistration struct {
 	ID           int
 	Token        string
-	Username     string        `json:"username" bson:"username"`
-	Password     string        `json:"password" bson:"password"`
-	Name         string        `json:"name" bson:"name"`
-	Preference   *Preference   `json:"preference" bson:"preference"`
-	Organization *Organization `json:"organization" bson:"organization"`
-	PushToken    string        `json:"pushToken" bson:"pushToken"`
-	PhoneNumber  string        `json:"phoneNumber" bson:"pushToken"`
+	Username     string             `json:"username" bson:"username"`
+	Password     string             `json:"password" bson:"password"`
+	Name         string             `json:"name" bson:"name"`
+	Preference   *Preference        `json:"preference" bson:"preference"`
+	Organization *ShortOrganization `json:"organization" bson:"organization"`
+	PushToken    string             `json:"pushToken" bson:"pushToken"`
+	PhoneNumber  string             `json:"phoneNumber" bson:"pushToken"`
 }
 
 func (p *ReqUserRegistration) ParseRequest(c *gin.Context) error {

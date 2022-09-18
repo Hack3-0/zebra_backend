@@ -17,7 +17,7 @@ func (s *UserService) GetUserByID(id int) (*model.User, error) {
 	return s.repo.GetUserByID(id)
 }
 
-func (s *UserService) ChangeOrganization(id int, org model.Organization) error {
+func (s *UserService) ChangeOrganization(id int, org model.ShortOrganization) error {
 	return s.repo.ChangeOrganization(id, org)
 }
 

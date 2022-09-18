@@ -51,7 +51,7 @@ func (h *Handler) changeOrganization(c *gin.Context) {
 		return
 	}
 
-	var org model.Organization
+	var org model.ShortOrganization
 
 	if err := c.ShouldBindWith(&org, binding.JSON); err != nil {
 		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))

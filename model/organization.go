@@ -12,6 +12,12 @@ type Organization struct {
 	Active    int    `json:"active" bson:"active"`
 }
 
+type ShortOrganization struct {
+	ID      int    `json:"id" bson:"id"`
+	Name    string `json:"name" bson:"name"`
+	Address string `json:"address" bson:"address"`
+}
+
 type Statistics struct {
 	ID             int       `json:"id" bson:"id"`
 	Address        string    `json:"address" bson:"address"`
