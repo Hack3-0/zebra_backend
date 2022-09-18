@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"log"
 	"strconv"
 	"zebra/model"
 	"zebra/utils"
@@ -80,6 +81,8 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 	}
 
 	menuItem.HasSuggar = (c.Request.FormValue("hasSugar") == "true")
+
+	log.Print(menuItem.ID)
 
 	err = h.services.Menu.UpdateMenuItem(&menuItem)
 	if err != nil {
