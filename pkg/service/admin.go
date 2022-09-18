@@ -84,7 +84,7 @@ func (s *AdminService) GetAllStatistics(timeStamp time.Time) ([]*model.Statistic
 }
 
 func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statistics, error) {
-	var res *model.Statistics
+	var res model.Statistics
 	revenue, cost, popular, err := s.repo.GetRevenue(id, timeStamp)
 	if err != nil {
 		return nil, err
@@ -92,7 +92,7 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 	log.Print(revenue, cost, popular)
 	res.ID = id
 	res.Revenue = revenue
-	res.Margin = float32(revenue-cost) / float32(revenue)
+	res.Margin = float32(revenue-cost) / float32(revenue) * float32(100)
 	res.PopularProduct = popular
 	admin, err := s.repo.GetOrgByID(id)
 	if err != nil {
@@ -100,5 +100,5 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 	}
 	res.Address = admin.Address
 
-	return res, nil
+	return &res, nil
 }

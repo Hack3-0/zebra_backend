@@ -136,7 +136,7 @@ func (h *Handler) getStatistics(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-
+	log.Print(reqTime.TimeStamp.Date())
 	if id == 0 {
 		statistics, err := h.services.Admin.GetAllStatistics(reqTime.TimeStamp)
 		if err != nil {
