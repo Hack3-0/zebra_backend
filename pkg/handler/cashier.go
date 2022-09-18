@@ -10,6 +10,7 @@ import (
 )
 
 func (h *Handler) signUpCash(c *gin.Context) {
+	log.Print("BEGIN")
 	id, err := getUserId(c)
 
 	if err != nil {

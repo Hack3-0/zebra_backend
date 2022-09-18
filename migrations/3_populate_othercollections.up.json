@@ -3,6 +3,18 @@
                 "insert": "users",
                 "documents": [
                         {
+                                "id" : 0,
+                                "token" : "APA91bFIRsx0Sp4ne7xXbJxCHAIgdtUmhJb9l2HnFvUkPgxScu46H49M9o01",
+                                "pushToken" : "",
+                                "username" : "admin",
+                                "password" : "admin",
+                                "name" : "",
+                                "phoneNumber" : "",
+                                "type" : "headAdmin",
+                                "preference" : null,
+                                "selectedOrganization" : 0
+                        },
+                        {
                                 "id": 1,
                                 "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0MjA3MDEsInVzZXJJZCI6MX0.awm9eY6mg2olhRO8qX5g2MR1L_2CopUowiDjHPNezKc",
                                 "pushToken": "",

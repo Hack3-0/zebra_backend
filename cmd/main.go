@@ -8,7 +8,6 @@ import (
 	"zebra"
 
 	"zebra/pkg/fcmService"
-	"zebra/utils"
 
 	"github.com/appleboy/go-fcm"
 
@@ -55,10 +54,10 @@ func main() {
 	}
 
 	repos := repository.NewRepository(db)
-	err = repos.Admin.CreateHeadAdmin(os.Getenv("HeadAdminToken"), os.Getenv("HeadAdminUsername"), os.Getenv("HeadAdminPassword"), utils.TypeHeadAdmin)
+	/*err = repos.Admin.CreateHeadAdmin(os.Getenv("HeadAdminToken"), os.Getenv("HeadAdminUsername"), os.Getenv("HeadAdminPassword"), utils.TypeHeadAdmin)
 	if err != nil {
 		log.Print(err)
-	}
+	}*/
 	go repos.Cashier.UpdateSession()
 	fService := fcmService.NewFcmService(repos, fcmClient, db)
 	service := service.NewService(repos, fService)
