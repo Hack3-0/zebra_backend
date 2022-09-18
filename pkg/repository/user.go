@@ -38,7 +38,7 @@ func (s *UserMongo) ChangeOrganization(id, orgID int) error {
 	res, err := collection.UpdateOne(
 		context.TODO(),
 		bson.M{"id": id},
-		bson.M{"$set": bson.M{"selectedOrganization": orgID}},
+		bson.M{"$set": bson.M{"organizationID": orgID}},
 	)
 
 	if err != nil {

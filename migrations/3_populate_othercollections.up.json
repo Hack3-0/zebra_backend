@@ -12,7 +12,7 @@
                                 "phoneNumber" : "",
                                 "type" : "headAdmin",
                                 "preference" : null,
-                                "selectedOrganization" : 0
+                                "organizationID" : 0
                         },
                         {
                                 "id": 1,
@@ -37,7 +37,7 @@
                                         3
                                 ]
                                 },
-                                "selectedOrganization": 1
+                                "organizationID": 1
                         }
                 ]
         },
@@ -252,7 +252,7 @@
                                 "id":18,
                                 "name" : "Coconut milk",
                                 "description":"lorem Ipsum",
-                                "category" : "mil",
+                                "category" : "milk",
                                 "price" : 300,
                                 "cost" : 200,
                                 "discount":0.0,

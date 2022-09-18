@@ -33,7 +33,7 @@ func (h *Handler) changeOrganization(c *gin.Context) {
 	}
 
 	var reqData struct {
-		OrgID int `json:"selectedOrganization" binding:"required"`
+		OrgID int `json:"organizationID" binding:"required"`
 	}
 
 	err = h.services.User.ChangeOrganization(id, reqData.OrgID)
