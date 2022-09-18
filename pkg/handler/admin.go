@@ -73,6 +73,11 @@ func (h *Handler) createMenuItem(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
+	menuItem.Cost, err = strconv.Atoi(c.Request.FormValue("cost"))
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
 
 	discount, err := strconv.ParseFloat(c.Request.FormValue("discount"), 32)
 	if err != nil {
@@ -95,6 +100,7 @@ func (h *Handler) createMenuItem(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
+	log.Print(menuItem)
 
 	newMenuItem, err := h.services.Menu.GetMenuItemByID(id)
 	if err != nil {
