@@ -48,5 +48,6 @@ type AllUser struct {
 	ID       int    `json:"id" bson:"id"`
 	Token    string `json:"token" bson:"token"`
 	Username string `json:"username" bson:"username"`
+	Name     string `json:"name" bson:"name"`
 	Type     string `json:"type" bson:"type"`
 }

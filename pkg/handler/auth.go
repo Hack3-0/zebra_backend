@@ -75,7 +75,15 @@ func (h *Handler) signIn(c *gin.Context) {
 
 	h.services.SetPushToken(reqData.Username, reqData.PushToken)
 
-	sendGeneral(user, c)
+	AllUser := model.AllUser{
+		ID:       user.ID,
+		Token:    user.Token,
+		Username: user.Username,
+		Name:     user.Name,
+		Type:     user.Type,
+	}
+
+	sendGeneral(AllUser, c)
 }
 
 /*
