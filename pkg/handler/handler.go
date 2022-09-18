@@ -20,40 +20,42 @@ func NewHandler(services *service.Service) *Handler {
 func (h *Handler) InitRoutes() *gin.Engine {
 	router := gin.New()
 
-	router.Use(cors.Default())
-
-	unauthed := router.Group("/unauthed")
+	router.Group("/root", h.setHeaders)
 	{
-		unauthed.Use(cors.Default())
-		unauthed.POST("/signup", h.signUp)
-		unauthed.POST("/signin", h.signIn)
-		unauthed.POST("/getOrganizations", h.getOrganizations)
-		unauthed.GET("/getMenu", h.getMenu)
-		unauthed.POST("/getMenuCategory", h.getMenuCategory)
 
-	}
-	//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0NDEyMzcsInVzZXJJZCI6M30.2nL_PBWJ7MXZia6Q0e9xdMuysk3ijkY5J1yL_FKRgZE
-
-	authed := router.Group("/authed", h.userIdentity)
-	{
-		authed.Use(cors.Default())
-		authed.POST("/startSession", h.startSession)
-		authed.POST("/endSession", h.endSession)
-		authed.POST("/makeOrder", h.makeOrder)
-		authed.POST("/changeOrderStatus", h.changeOrderStatus)
-		authed.GET("/getUser", h.getUser)
-		authed.POST("/changeOrganization", h.changeOrganization)
-		authed.GET("/getUserInfo", h.getUserInfo)
-		admin := authed.Group("/admin", h.adminIdentity)
+		unauthed := router.Group("/unauthed")
 		{
-			admin.Use(cors.Default())
-			admin.POST("/signup", h.signUpCash)
-			admin.POST("/getCashiers", h.getCashiers)
-			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
+			unauthed.Use(cors.Default())
+			unauthed.POST("/signup", h.signUp)
+			unauthed.POST("/signin", h.signIn)
+			unauthed.POST("/getOrganizations", h.getOrganizations)
+			unauthed.GET("/getMenu", h.getMenu)
+			unauthed.POST("/getMenuCategory", h.getMenuCategory)
+
+		}
+		//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0NDEyMzcsInVzZXJJZCI6M30.2nL_PBWJ7MXZia6Q0e9xdMuysk3ijkY5J1yL_FKRgZE
+
+		authed := router.Group("/authed", h.userIdentity)
+		{
+			authed.Use(cors.Default())
+			authed.POST("/startSession", h.startSession)
+			authed.POST("/endSession", h.endSession)
+			authed.POST("/makeOrder", h.makeOrder)
+			authed.POST("/changeOrderStatus", h.changeOrderStatus)
+			authed.GET("/getUser", h.getUser)
+			authed.POST("/changeOrganization", h.changeOrganization)
+			authed.GET("/getUserInfo", h.getUserInfo)
+			admin := authed.Group("/admin", h.adminIdentity)
 			{
-				headAdmin.Use(cors.Default())
-				headAdmin.POST("/signup", h.signUpOrg)
-				headAdmin.POST("/createMenuItem", h.createMenuItem)
+				admin.Use(cors.Default())
+				admin.POST("/signup", h.signUpCash)
+				admin.POST("/getCashiers", h.getCashiers)
+				headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
+				{
+					headAdmin.Use(cors.Default())
+					headAdmin.POST("/signup", h.signUpOrg)
+					headAdmin.POST("/createMenuItem", h.createMenuItem)
+				}
 			}
 		}
 	}
