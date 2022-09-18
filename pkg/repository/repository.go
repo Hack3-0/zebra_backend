@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"time"
 	"zebra/model"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -53,6 +54,7 @@ type Admin interface {
 	GetOrganizations() ([]*model.Organization, error)
 	AddCashier(id, newID int) error
 	CreateHeadAdmin(token, password, username, userType string) error
+	GetRevenue(id int, timeStamp time.Time) (int, int, *model.MenuItem, error)
 }
 type Cashier interface {
 	CreateCash(data model.ReqCashRegistration) error

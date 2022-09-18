@@ -208,3 +208,11 @@ type ReqName struct {
 func (p *ReqName) ParseRequest(c *gin.Context) error {
 	return c.ShouldBindWith(&p, binding.JSON)
 }
+
+type ReqTime struct {
+	TimeStamp time.Time `json:"timeStamp" bson:"timeStamp"`
+}
+
+func (p *ReqTime) ParseRequest(c *gin.Context) error {
+	return c.ShouldBindWith(&p, binding.JSON)
+}

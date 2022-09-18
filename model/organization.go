@@ -11,3 +11,11 @@ type Organization struct {
 	Type      string `json:"type" bson:"type"`
 	Active    int    `json:"active" bson:"active"`
 }
+
+type Statistics struct {
+	ID             int       `json:"id" bson:"id"`
+	Address        string    `json:"address" bson:"address"`
+	Revenue        int       `json:"revenue" bson:"revenue"`
+	Margin         float32   `json:"margin" bson:"margin"`
+	PopularProduct *MenuItem `json:"menuItem" bson:"menuItem"`
+}

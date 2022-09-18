@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"log"
+	"time"
 	"zebra/model"
 	"zebra/utils"
 
@@ -159,4 +160,56 @@ func (s *AdminMongo) CreateHeadAdmin(token, password, username, userType string)
 	}
 
 	return nil
+}
+
+func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.MenuItem, error) {
+	col := s.db.Collection(collectionOrders)
+	var orders []*model.Order
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"time": bson.M{"$gte": timeStamp}, "id": id},
+	)
+	if err != nil {
+		return -1, -1, nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &orders); err != nil {
+		return -1, -1, nil, err
+	}
+
+	totalRev := 0
+	totalCost := 0
+
+	countMap := make(map[int]int, 0)
+	if len(orders) == 0 {
+		return 0, 0, nil, nil
+	}
+	for _, order := range orders {
+		for _, item := range order.Items {
+			totalRev = totalRev + item.Price
+			totalCost = totalCost + item.Cost
+			if _, exists := countMap[item.ID]; exists {
+				countMap[item.ID] = countMap[item.ID] + 1
+			} else {
+				countMap[item.ID] = 1
+			}
+		}
+	}
+	max := -1
+	maxIndex := -1
+	for key, val := range countMap {
+		if val > max {
+			maxIndex = key
+		}
+	}
+	var popular *model.MenuItem
+	for _, order := range orders {
+		for _, item := range order.Items {
+			if item.ID == maxIndex {
+				popular = item
+			}
+		}
+	}
+
+	return totalRev, totalCost, popular, nil
 }

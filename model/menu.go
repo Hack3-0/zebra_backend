@@ -6,6 +6,7 @@ type MenuItem struct {
 	Description string  `json:"description" bson:"description"`
 	Category    string  `json:"category" bson:"category"`
 	Price       int     `json:"price" bson:"price"`
+	Cost        int     `json:"cost" bson:"cost"`
 	Discount    float32 `json:"discount" bson:"discount"`
 	HasSuggar   bool    `json:"hasSugar" bson:"hasSugar"`
 	Image       string  `json:"image" bson:"image"`

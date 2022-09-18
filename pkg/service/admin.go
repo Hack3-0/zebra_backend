@@ -66,3 +66,38 @@ func (s *AdminService) GetOrganizations() ([]*model.Organization, error) {
 func (s *AdminService) AddCashier(id, newID int) error {
 	return s.repo.AddCashier(id, newID)
 }
+
+func (s *AdminService) getAllStatistics(timeStamp time.Time) ([]*model.Statistics, error) {
+	admins, err := s.repo.GetOrganizations()
+	if err != nil {
+		return nil, err
+	}
+	stat := make([]*model.Statistics, 0)
+	for _, item := range admins {
+		s, err := s.getStatistics((item.ID), timeStamp)
+		if err != nil {
+			return nil, err
+		}
+		stat = append(stat, s)
+	}
+	return stat, nil
+}
+
+func (s *AdminService) getStatistics(id int, timeStamp time.Time) (*model.Statistics, error) {
+	var res *model.Statistics
+	revenue, cost, popular, err := s.repo.GetRevenue(id, timeStamp)
+	if err != nil {
+		return nil, err
+	}
+	res.ID = id
+	res.Revenue = revenue
+	res.Margin = float32(revenue-cost) / float32(revenue)
+	res.PopularProduct = popular
+	admin, err := s.repo.GetOrgByID(id)
+	if err != nil {
+		return nil, err
+	}
+	res.Address = admin.Address
+
+	return res, nil
+}

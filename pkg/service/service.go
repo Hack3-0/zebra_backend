@@ -25,6 +25,8 @@ type Admin interface {
 	GetOrgByUsername(username string) (*model.Organization, error)
 	GetOrganizations() ([]*model.Organization, error)
 	AddCashier(id, newID int) error
+	getStatistics(id int, timeStamp time.Time) (*model.Statistics, error)
+	getAllStatistics(timeStamp time.Time) ([]*model.Statistics, error)
 }
 
 type Cashier interface {

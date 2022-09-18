@@ -45,6 +45,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		{
 			admin.POST("/signup", h.signUpCash)
 			admin.POST("/getCashiers", h.getCashiers)
+			admin.POST("/getRevenue", h.getStatistics)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
 			{
 				headAdmin.POST("/deleteMenuItem", h.deleteMenuItem)

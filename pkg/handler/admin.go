@@ -121,3 +121,37 @@ func (h *Handler) getMenuCategory(c *gin.Context) {
 
 	sendGeneral(menu, c)
 }
+
+func (h *Handler) getStatistics(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	var reqTime model.ReqTime
+	err = reqTime.ParseRequest(c)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	/*
+		if id == 0 {
+			statistics, err := h.services.Admin.
+			if err != nil {
+				defaultErrorHandler(c, err)
+				return
+			}
+			sendGeneral(statistics, c)
+		} else {
+			statistics, err := h.services.Admin.getStatistics(id, reqTime.TimeStamp)
+			if err != nil {
+				defaultErrorHandler(c, err)
+				return
+			}
+			sendGeneral(statistics, c)
+		}*/
+	return
+
+}
