@@ -29,7 +29,7 @@ func (s *CashierMongo) CreateCash(data model.ReqCashRegistration) error {
 	newOrg.Username = data.Username
 	newOrg.Name = data.Name
 	newOrg.Type = utils.TypeCashier
-	newOrg.OrganizationID = data.OrganizationID
+	newOrg.Organization = data.Organization
 	_, err := col.InsertOne(
 		context.TODO(),
 		newOrg,
