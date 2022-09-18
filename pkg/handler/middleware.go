@@ -20,6 +20,8 @@ func (h *Handler) userIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
 	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Accept-Encoding, Connection")
+	c.Header("Access-Control-Allow-Credentials", "true")
+
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 	header := c.GetHeader(authorizationHeader)
 	if header == "" {
@@ -55,6 +57,8 @@ func getUserId(c *gin.Context) (int, error) {
 	c.Header("Access-Control-Allow-Origin", "*")
 	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Accept-Encoding, Connection")
+	c.Header("Access-Control-Allow-Credentials", "true")
+
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
@@ -74,6 +78,7 @@ func (h *Handler) adminIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
 	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Accept-Encoding, Connection")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
@@ -94,16 +99,11 @@ func (h *Handler) adminIdentity(c *gin.Context) {
 
 }
 
-func (h *Handler) setHeaders(c *gin.Context) {
-	c.Header("Access-Control-Allow-Origin", "*")
-	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-	c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Accept-Encoding, Connection")
-}
-
 func (h *Handler) headAdminIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
 	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 	c.Header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Accept-Encoding, Connection")
+	c.Header("Access-Control-Allow-Credentials", "true")
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
