@@ -24,6 +24,7 @@ func (h *Handler) makeOrder(c *gin.Context) {
 		return
 	}
 	log.Print(reqOrder)
+	reqOrder.ID = id
 	user, err := h.services.User.GetUserByID(id)
 	if err != nil {
 		defaultErrorHandler(c, err)
