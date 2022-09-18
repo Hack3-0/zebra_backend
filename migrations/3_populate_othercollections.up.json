@@ -53,7 +53,8 @@
                                 "cost" : 665,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id" : 2,
@@ -64,7 +65,8 @@
                                 "cost" : 490,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id" : 3,
@@ -75,7 +77,8 @@
                                 "cost":665,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id" : 4,
@@ -86,7 +89,8 @@
                                 "cost" : 553,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":5,
@@ -97,7 +101,8 @@
                                 "cost" : 595,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":6,
@@ -108,7 +113,8 @@
                                 "cost" : 595,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":7,
@@ -119,7 +125,8 @@
                                 "cost" : 525,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":8,
@@ -130,7 +137,8 @@
                                 "cost" : 525,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":9,
@@ -141,7 +149,8 @@
                                 "cost" : 560,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":10,
@@ -152,7 +161,8 @@
                                 "cost" : 560,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":11,
@@ -163,7 +173,8 @@
                                 "cost" : 525,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":12,
@@ -174,7 +185,8 @@
                                 "cost" : 770,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":13,
@@ -185,7 +197,8 @@
                                 "cost" : 830,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":14,
@@ -196,7 +209,8 @@
                                 "cost" : 1043,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":15,
@@ -207,7 +221,8 @@
                                 "cost" : 1043,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":16,
@@ -218,7 +233,8 @@
                                 "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":17,
@@ -229,7 +245,8 @@
                                 "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         },
                         {
                                 "id":18,
@@ -240,7 +257,8 @@
                                 "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none"
+                                "image":"none",
+                                "hide":false
                         }
 
                 ]
