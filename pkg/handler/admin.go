@@ -4,9 +4,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
-	"strconv"
 	"zebra/model"
-	"zebra/utils"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -59,48 +57,22 @@ func (h *Handler) getOrganizations(c *gin.Context) {
 }
 
 func (h *Handler) createMenuItem(c *gin.Context) {
-	imageName, err := utils.CreateMenuItemImageImage(c)
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
-	}
 	var menuItem model.MenuItem
-	menuItem.Name = c.Request.FormValue("name")
-	menuItem.Description = c.Request.FormValue("description")
-	menuItem.Category = c.Request.FormValue("category")
-	menuItem.Price, err = strconv.Atoi(c.Request.FormValue("price"))
-	if err != nil {
-		defaultErrorHandler(c, err)
+	if err := c.ShouldBindWith(&menuItem, binding.JSON); err != nil {
+		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))
 		return
 	}
-	menuItem.Cost, err = strconv.Atoi(c.Request.FormValue("cost"))
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
-	}
-
-	discount, err := strconv.ParseFloat(c.Request.FormValue("discount"), 32)
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
-	}
-	menuItem.Discount = float32(discount)
-	menuItem.HasSuggar = (c.Request.FormValue("hasSugar") == "true")
-
 	id, err := h.services.Menu.GetNewMenuItemID()
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
 	menuItem.ID = id
-	menuItem.Image = imageName
-	log.Print(imageName)
 	err = h.services.Menu.CreateMenuItem(menuItem)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
-	log.Print(menuItem)
 
 	newMenuItem, err := h.services.Menu.GetMenuItemByID(id)
 	if err != nil {
