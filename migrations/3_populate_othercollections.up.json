@@ -177,11 +177,55 @@
                         },
                         {
                                 "id":14,
-                                "name" : "Salmon croissant",
+                                "name" : "Soevoe milk",
                                 "description":"lorem Ipsum",
-                                "category" : "snack",
-                                "price" : 1490,
+                                "category" : "milk",
+                                "price" : 300,
                                 "cost" : 1043,
+                                "discount":0.0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":15,
+                                "name" : "Almond milk",
+                                "description":"lorem Ipsum",
+                                "category" : "milk",
+                                "price" : 300,
+                                "cost" : 1043,
+                                "discount":0.0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":16,
+                                "name" : "Oat milk",
+                                "description":"lorem Ipsum",
+                                "category" : "milk",
+                                "price" : 300,
+                                "cost" : 200,
+                                "discount":0.0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":17,
+                                "name" : "Hazelnut milk",
+                                "description":"lorem Ipsum",
+                                "category" : "milk",
+                                "price" : 300,
+                                "cost" : 200,
+                                "discount":0.0,
+                                "hasSugar":true,
+                                "image":"none"
+                        },
+                        {
+                                "id":18,
+                                "name" : "Coconut milk",
+                                "description":"lorem Ipsum",
+                                "category" : "mil",
+                                "price" : 300,
+                                "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
                                 "image":"none"
