@@ -26,7 +26,6 @@ func (h *Handler) deleteMenuItem(c *gin.Context) {
 }
 
 func (h *Handler) updateMenuItem(c *gin.Context) {
-
 	var menuItem model.MenuItem
 	id, err := strconv.Atoi(c.Request.FormValue("id"))
 	if err != nil {
@@ -38,6 +37,7 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
+	menuItem.ID = id
 	if c.Request.FormValue("image") != "" {
 		imageName, err := utils.CreateMenuItemImageImage(c)
 		if err != nil {
