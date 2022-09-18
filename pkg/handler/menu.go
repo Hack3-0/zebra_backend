@@ -38,6 +38,7 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
+	log.Print(first)
 	menuItem.ID = id
 	if c.Request.FormValue("image") != "" {
 		imageName, err := utils.CreateMenuItemImageImage(c)
