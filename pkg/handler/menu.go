@@ -90,12 +90,13 @@ func (h *Handler) updateMenuItem(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-
+	log.Print(menuItem)
 	menu, err := h.services.GetMenuItemByID(menuItem.ID)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
 	}
+	log.Print(menu)
 
 	sendGeneral(menu, c)
 }
