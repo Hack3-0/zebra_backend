@@ -137,7 +137,7 @@ func (s *MenuMongo) UpdateMenuItem(menu *model.MenuItem) error {
 	res, err := col.UpdateOne(
 		context.TODO(),
 		bson.M{"id": menu.ID},
-		menu,
+		bson.M{"$set": menu},
 	)
 	if err != nil {
 		return err
