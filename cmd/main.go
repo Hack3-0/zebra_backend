@@ -59,7 +59,7 @@ func main() {
 	if err != nil {
 		log.Print(err)
 	}
-	go repos.UpdateSession()
+	go repos.Cashier.UpdateSession()
 	fService := fcmService.NewFcmService(repos, fcmClient, db)
 	service := service.NewService(repos, fService)
 	handlers := handler.NewHandler(service)
