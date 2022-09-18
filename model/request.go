@@ -129,9 +129,6 @@ func (p *ReqOrgRegistration) ParseRequest(c *gin.Context) error {
 	return nil
 }
 
-type ReqMenu struct {
-}
-
 type ReqCashRegistration struct {
 	ID             int
 	Token          string

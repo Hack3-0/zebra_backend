@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"errors"
-	"os"
 	"zebra/pkg/service"
 
 	"github.com/gin-contrib/cors"
@@ -48,6 +46,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			admin.POST("/getRevenue", h.getStatistics)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
 			{
+				headAdmin.POST("/uploadImage", h.uploadImage)
 				headAdmin.POST("/deleteMenuItem", h.deleteMenuItem)
 				headAdmin.POST("/updateMenuItem", h.updateMenuItem)
 				headAdmin.POST("/signup", h.signUpOrg)
@@ -57,17 +56,4 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	}
 
 	return router
-}
-
-// mediaHandler used to handle topic thread
-func (h *Handler) mediaHandler(c *gin.Context) {
-	filename := c.Param("fileName")
-	if filename == "" {
-		defaultErrorHandler(c, errors.New("bad request"))
-		return
-	}
-
-	locationMedia := os.Getenv("LocationMedia")
-
-	c.File(locationMedia + filename)
 }

@@ -152,6 +152,5 @@ func (h *Handler) getStatistics(c *gin.Context) {
 		}
 		sendGeneral(statistics, c)
 	}
-	return
 
 }
