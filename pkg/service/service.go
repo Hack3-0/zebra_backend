@@ -50,7 +50,7 @@ type Menu interface {
 	GetNewMenuItemID() (int, error)
 	GetMenuCategory(category string) ([]*model.MenuItem, error)
 	DeleteMenuItem(id int) error
-	UpdateMenuItem(menu *model.MenuItem) (*model.MenuItem, error)
+	UpdateMenuItem(menu *model.MenuItem) error
 }
 
 type Order interface {
