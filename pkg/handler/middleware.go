@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -16,6 +17,8 @@ const (
 )
 
 func (h *Handler) userIdentity(c *gin.Context) {
+	log.Print(1)
+	log.Print(c.GetHeader("Access-Control-Allow-Origin"))
 	header := c.GetHeader(authorizationHeader)
 	if header == "" {
 		newErrorResponse(c, http.StatusUnauthorized, "empty auth header")
@@ -61,6 +64,7 @@ func getUserId(c *gin.Context) (int, error) {
 }
 
 func (h *Handler) adminIdentity(c *gin.Context) {
+	log.Print(2)
 	id, ok := c.Get(userCtx)
 	if !ok {
 		newErrorResponse(c, http.StatusUnauthorized, errors.New("user id not found").Error())
@@ -80,6 +84,7 @@ func (h *Handler) adminIdentity(c *gin.Context) {
 }
 
 func (h *Handler) headAdminIdentity(c *gin.Context) {
+	log.Print(3)
 	id, ok := c.Get(userCtx)
 	if !ok {
 		newErrorResponse(c, http.StatusUnauthorized, errors.New("user id not found").Error())
