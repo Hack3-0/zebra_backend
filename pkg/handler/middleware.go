@@ -18,6 +18,8 @@ const (
 
 func (h *Handler) userIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+	c.Header("Access-Control-Allow-Headers", "Authorization")
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 	header := c.GetHeader(authorizationHeader)
 	if header == "" {
@@ -51,6 +53,8 @@ func (h *Handler) userIdentity(c *gin.Context) {
 
 func getUserId(c *gin.Context) (int, error) {
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+	c.Header("Access-Control-Allow-Headers", "Authorization")
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
@@ -68,6 +72,8 @@ func getUserId(c *gin.Context) (int, error) {
 
 func (h *Handler) adminIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+	c.Header("Access-Control-Allow-Headers", "Authorization")
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
@@ -90,6 +96,8 @@ func (h *Handler) adminIdentity(c *gin.Context) {
 
 func (h *Handler) headAdminIdentity(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+	c.Header("Access-Control-Allow-Headers", "Authorization")
 	log.Print(c.Writer.Header().Get("Access-Control-Allow-Origin"))
 
 	id, ok := c.Get(userCtx)
