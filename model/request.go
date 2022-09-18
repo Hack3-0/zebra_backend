@@ -130,12 +130,12 @@ func (p *ReqOrgRegistration) ParseRequest(c *gin.Context) error {
 }
 
 type ReqCashRegistration struct {
-	ID             int
-	Token          string
-	Username       string `json:"username" bson:"username"`
-	Password       string `json:"password" bson:"password"`
-	Name           string `json:"name" bson:"name"`
-	OrganizationID int
+	ID           int
+	Token        string
+	Username     string `json:"username" bson:"username"`
+	Password     string `json:"password" bson:"password"`
+	Name         string `json:"name" bson:"name"`
+	Organization *Organization
 }
 
 func (p *ReqCashRegistration) ParseRequest(c *gin.Context) error {

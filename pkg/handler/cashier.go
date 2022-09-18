@@ -23,7 +23,12 @@ func (h *Handler) signUpCash(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-	reqCash.OrganizationID = id
+	org, err := h.services.Admin.GetOrgByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	reqCash.Organization = org
 	log.Print(id)
 	if err = h.services.Unauthed.CheckUsername(reqCash.Username); err == nil {
 		defaultErrorHandler(c, errors.New("username is already taken"))
@@ -69,7 +74,7 @@ func (h *Handler) startSession(c *gin.Context) {
 		return
 	}
 
-	org, err := h.services.Admin.GetOrgByID(cashier.OrganizationID)
+	org, err := h.services.Admin.GetOrgByID(cashier.Organization.ID)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
@@ -79,7 +84,7 @@ func (h *Handler) startSession(c *gin.Context) {
 		return
 	}
 
-	err = h.services.Cashier.StartSession(id, cashier.OrganizationID)
+	err = h.services.Cashier.StartSession(id, cashier.Organization.ID)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return
@@ -106,7 +111,7 @@ func (h *Handler) endSession(c *gin.Context) {
 		return
 	}
 
-	err = h.services.Cashier.EndSession(id, cashier.OrganizationID)
+	err = h.services.Cashier.EndSession(id, cashier.Organization.ID)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return

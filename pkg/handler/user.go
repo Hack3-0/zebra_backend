@@ -24,6 +24,23 @@ func (h *Handler) getUser(c *gin.Context) {
 	sendGeneral(user, c)
 }
 
+func (h *Handler) getCashier(c *gin.Context) {
+	keys := c.Request.URL.Query()["id"]
+	id, err := strconv.Atoi(keys[0])
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	user, err := h.services.Cashier.GetCashByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	sendGeneral(user, c)
+}
+
 func (h *Handler) changeOrganization(c *gin.Context) {
 	id, err := getUserId(c)
 
