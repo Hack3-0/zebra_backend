@@ -1,10 +1,12 @@
 package handler
 
 import (
+	"errors"
 	"strconv"
 	"zebra/model"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 func (h *Handler) getUser(c *gin.Context) {
@@ -49,11 +51,12 @@ func (h *Handler) changeOrganization(c *gin.Context) {
 		return
 	}
 
-	var reqData struct {
-		OrgID int `json:"organizationID" binding:"required"`
-	}
+	var org model.Organization
 
-	err = h.services.User.ChangeOrganization(id, reqData.OrgID)
+	if err := c.ShouldBindWith(&org, binding.JSON); err != nil {
+		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))
+	}
+	err = h.services.User.ChangeOrganization(id, org)
 	if err != nil {
 		defaultErrorHandler(c, err)
 		return

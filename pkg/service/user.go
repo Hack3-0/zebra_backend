@@ -17,8 +17,8 @@ func (s *UserService) GetUserByID(id int) (*model.User, error) {
 	return s.repo.GetUserByID(id)
 }
 
-func (s *UserService) ChangeOrganization(id, orgID int) error {
-	return s.repo.ChangeOrganization(id, orgID)
+func (s *UserService) ChangeOrganization(id int, org model.Organization) error {
+	return s.repo.ChangeOrganization(id, org)
 }
 
 func (s *UserService) GetUserOrders(id int) ([]*model.Order, error) {

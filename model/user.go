@@ -51,3 +51,11 @@ type AllUser struct {
 	Name     string `json:"name" bson:"name"`
 	Type     string `json:"type" bson:"type"`
 }
+
+type Notification struct {
+	ID     int       `json:"id" bson:"id"`
+	UserID int       `json:"userID" bson:"userID"`
+	Title  string    `json:"string" bson:"string"`
+	Text   string    `json:"Text" bson:"Text"`
+	Time   time.Time `json:"time" bson:"time"`
+}

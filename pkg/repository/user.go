@@ -32,13 +32,13 @@ func (s *UserMongo) GetUserByID(id int) (*model.User, error) {
 	return user, nil
 }
 
-func (s *UserMongo) ChangeOrganization(id, orgID int) error {
+func (s *UserMongo) ChangeOrganization(id int, org model.Organization) error {
 	collection := s.db.Collection(collectionUser)
 
 	res, err := collection.UpdateOne(
 		context.TODO(),
 		bson.M{"id": id},
-		bson.M{"$set": bson.M{"organizationID": orgID}},
+		bson.M{"$set": bson.M{"organization": org}},
 	)
 
 	if err != nil {

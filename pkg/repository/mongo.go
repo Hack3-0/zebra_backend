@@ -14,12 +14,11 @@ type Config struct {
 }
 
 const (
-	collectionUser          = "users"
-	collectionBoyman        = "boyman"
-	collectionOrganizations = "organizations"
-	collectionOrders        = "order"
-	collectionMenu          = "menu"
-	collectionMenuItems     = "menuItems"
+	collectionUser         = "users"
+	collectionBoyman       = "boyman"
+	collectionOrders       = "order"
+	collectionMenu         = "menu"
+	collectionNotification = "notification"
 )
 
 func NewMongoDB(cfg Config) (*mongo.Database, *mongo.Client, error) {

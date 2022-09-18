@@ -44,7 +44,7 @@ type Menu interface {
 
 type User interface {
 	GetUserByID(id int) (*model.User, error)
-	ChangeOrganization(id, orgID int) error
+	ChangeOrganization(id int, org model.Organization) error
 	GetUserOrders(id int) ([]*model.Order, error)
 }
 
@@ -67,7 +67,9 @@ type Cashier interface {
 	GetCashiers(id int) ([]*model.Cashier, error)
 	UpdateSession()
 }
-
+type LocalNotification interface {
+	CreateNotification(data *model.Notification) (*model.Notification, error)
+}
 type Order interface {
 	CreateOrder(data model.ReqOrder) error
 	GetOrderByID(id int) (*model.Order, error)
@@ -83,18 +85,19 @@ type Repository struct {
 	Cashier
 	Order
 	Menu
-	//LocalNotification
+	LocalNotification
 }
 
 func NewRepository(db *mongo.Database) *Repository {
 	return &Repository{
 		Unauthed: NewUnauthMongo(db),
 		//Profile:           NewProfileMongo(db),
-		PushNotification: NewPushNotificationMongo(db),
-		User:             NewUserMongo(db),
-		Admin:            NewAdminMongo(db),
-		Cashier:          NewCashierMongo(db),
-		Order:            NewOrderMongo(db),
-		Menu:             NewMenuMongo(db),
+		PushNotification:  NewPushNotificationMongo(db),
+		User:              NewUserMongo(db),
+		Admin:             NewAdminMongo(db),
+		Cashier:           NewCashierMongo(db),
+		Order:             NewOrderMongo(db),
+		Menu:              NewMenuMongo(db),
+		LocalNotification: NewLocalNotificationMongo(db),
 	}
 }

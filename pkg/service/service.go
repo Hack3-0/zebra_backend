@@ -42,7 +42,7 @@ type Cashier interface {
 
 type User interface {
 	GetUserByID(id int) (*model.User, error)
-	ChangeOrganization(id, orgID int) error
+	ChangeOrganization(id int, org model.Organization) error
 	GetUserOrders(id int) ([]*model.Order, error)
 }
 
