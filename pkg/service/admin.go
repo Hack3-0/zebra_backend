@@ -2,6 +2,7 @@ package service
 
 import (
 	"log"
+	"sort"
 	"time"
 	"zebra/model"
 	"zebra/pkg/repository"
@@ -103,6 +104,9 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 		res.ProductStat = popular
 
 	}
+	sort.Slice(res.ProductStat, func(i, j int) bool {
+		return res.ProductStat[i].Revenue < res.ProductStat[j].Revenue
+	})
 	admin, err := s.repo.GetOrgByID(id)
 	if err != nil {
 		return nil, err
