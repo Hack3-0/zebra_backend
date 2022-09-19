@@ -50,6 +50,7 @@ func (s *UnauthedService) CreateUser(user model.ReqUserRegistration) error {
 	if err != nil {
 		return err
 	}
+
 	log.Print(user.Token)
 	url := utils.QrGetURL + strconv.Itoa(user.ID)
 	log.Print(url)
