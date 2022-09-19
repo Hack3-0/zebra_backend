@@ -106,12 +106,12 @@ func (s *OrderMongo) GetNewFeedbackID() (int, error) {
 	return newId, nil
 }
 
-func (s *OrderMongo) ChangeOrderStatus(id int) error {
+func (s *OrderMongo) ChangeOrderStatus(id, cashID int) error {
 	col := s.db.Collection(collectionOrders)
 	_, err := col.UpdateOne(
 		context.TODO(),
 		bson.M{"id": id},
-		bson.M{"$set": bson.M{"status": utils.Complete}},
+		bson.M{"$set": bson.M{"status": utils.Complete, "cashierID": cashID}},
 	)
 
 	if err != nil {

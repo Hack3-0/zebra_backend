@@ -76,7 +76,7 @@ type Order interface {
 	CreateOrder(data model.ReqOrder) error
 	GetOrderByID(id int) (*model.Order, error)
 	GetNewOrderID() (int, error)
-	ChangeOrderStatus(id int) error
+	ChangeOrderStatus(id, cashID int) error
 	GetNewFeedbackID() (int, error)
 	CreateFeedback(req model.ReqFeedback) error
 	GetOrders(id int) ([]*model.Order, error)

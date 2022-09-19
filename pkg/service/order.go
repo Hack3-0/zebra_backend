@@ -32,7 +32,7 @@ func (s *OrderService) GetNewOrderID() (int, error) {
 	return s.repo.GetNewOrderID()
 }
 
-func (s *OrderService) ChangeOrderStatus(id int) error {
+func (s *OrderService) ChangeOrderStatus(id, cashID int) error {
 	return s.repo.ChangeOrderStatus(id)
 }
 
