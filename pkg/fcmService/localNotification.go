@@ -26,3 +26,14 @@ func (s *LocalService) CreateNotification(data *model.Notification) (*model.Noti
 	data.ID = id
 	return s.repo.CreateNotification(data)
 }
+
+func (s *LocalService) CreateNotificationAll(data *model.Notification, ids []int) error {
+	for _, val := range ids {
+		data.UserID = val
+		_, err := s.CreateNotification(data)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

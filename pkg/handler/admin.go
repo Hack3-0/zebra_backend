@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 	"zebra/model"
 
 	"github.com/gin-gonic/gin"
@@ -149,4 +150,22 @@ func (h *Handler) getFeedback(c *gin.Context) {
 	}
 
 	sendGeneral(feedback, c)
+}
+
+func (h *Handler) sendAll(c *gin.Context) {
+	var notification model.SendAllNotification
+	if err := c.ShouldBindWith(&notification, binding.JSON); err != nil {
+		defaultErrorHandler(c, errors.New("bad request | "+err.Error()))
+		return
+	}
+	realNotification := &model.Notification{Title: notification.Title, Text: notification.Text, Time: time.Now()}
+
+	users, pushTokens, err := h.services.User.GetEveryUser()
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	h.localService.CreateNotificationAll(realNotification, users)
+	h.pushService.SendPushNotificationAll(pushTokens, notification.Text, notification.Title)
+	sendSuccess(c)
 }

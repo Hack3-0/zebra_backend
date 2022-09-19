@@ -10,10 +10,12 @@ import (
 
 type Push interface {
 	SendPushNotification(TakerID int, text, title string) error
+	SendPushNotificationAll(tokens []string, text, title string) error
 }
 
 type Local interface {
 	CreateNotification(data *model.Notification) (*model.Notification, error)
+	CreateNotificationAll(data *model.Notification, ids []int) error
 }
 
 type FcmService struct {

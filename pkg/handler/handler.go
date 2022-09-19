@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"zebra/pkg/fcmService"
 	"zebra/pkg/service"
 
 	"github.com/gin-contrib/cors"
@@ -8,11 +9,13 @@ import (
 )
 
 type Handler struct {
-	services *service.Service
+	services     *service.Service
+	pushService  fcmService.Push
+	localService fcmService.Local
 }
 
-func NewHandler(services *service.Service) *Handler {
-	return &Handler{services: services}
+func NewHandler(services *service.Service, pushService fcmService.Push, localService fcmService.Local) *Handler {
+	return &Handler{services: services, pushService: pushService, localService: localService}
 }
 
 func (h *Handler) InitRoutes() *gin.Engine {
@@ -51,6 +54,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			admin.POST("/getFeedback", h.getFeedback)
 			headAdmin := admin.Group("/headAdmin", h.headAdminIdentity)
 			{
+				headAdmin.POST("/sendAll", h.sendAll)
 				headAdmin.POST("/uploadImage", h.uploadImage)
 				headAdmin.POST("/deleteMenuItem", h.deleteMenuItem)
 				headAdmin.POST("/updateMenuItem", h.updateMenuItem)

@@ -44,3 +44,28 @@ func (s *PushService) SendPushNotification(TakerID int, text, title string) erro
 	}
 	return nil
 }
+
+func (s *PushService) SendPushNotificationAll(tokens []string, text, title string) error {
+	for _, pushToken := range tokens {
+		if pushToken == "" {
+			logrus.Print("empty pushToken")
+			return nil
+		}
+		msg := &fcm.Message{
+			To: pushToken,
+			Notification: &fcm.Notification{
+				Title:       title,
+				Body:        text,
+				ClickAction: "FLUTTER_NOTIFICATION_CLICK",
+			},
+		}
+		// Send the message and receive the response without retries.
+		_, err := s.fcmClient.Send(msg)
+		if err != nil {
+			log.Print("ERROR: ", err.Error())
+			return nil
+		}
+	}
+
+	return nil
+}

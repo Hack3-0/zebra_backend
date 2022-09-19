@@ -47,7 +47,13 @@ type AllUser struct {
 type Notification struct {
 	ID     int       `json:"id" bson:"id"`
 	UserID int       `json:"userID" bson:"userID"`
-	Title  string    `json:"string" bson:"string"`
-	Text   string    `json:"Text" bson:"Text"`
+	Title  string    `json:"title" bson:"title"`
+	Text   string    `json:"text" bson:"text"`
 	Time   time.Time `json:"time" bson:"time"`
+}
+
+type SendAllNotification struct {
+	Title string `json:"title" bson:"title"`
+	Text  string `json:"text" bson:"text"`
+	Time  time.Time
 }

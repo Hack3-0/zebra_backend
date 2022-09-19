@@ -117,3 +117,35 @@ func (s *UserMongo) GetNotifications(id int) ([]*model.Notification, error) {
 
 	return notifications, nil
 }
+
+func (s *UserMongo) GetEveryUser() ([]int, []string, error) {
+	col := s.db.Collection(collectionUser)
+	var users []*model.User
+
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"type": utils.TypeUser},
+	)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &users); err != nil {
+		return nil, nil, err
+	}
+
+	if len(users) == 0 {
+		users = []*model.User{}
+	}
+
+	ids := make([]int, 0)
+	tokens := make([]string, 0)
+	for _, item := range users {
+		ids = append(ids, item.ID)
+		tokens = append(tokens, item.PushToken)
+	}
+
+	return ids, tokens, nil
+
+}

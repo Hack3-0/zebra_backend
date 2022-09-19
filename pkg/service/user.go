@@ -41,3 +41,7 @@ func (s *UserService) IncreaseCups(id, coffeeNum int) error {
 func (s *UserService) GetNotifications(id int) ([]*model.Notification, error) {
 	return s.repo.GetNotifications(id)
 }
+
+func (s *UserService) GetEveryUser() ([]int, []string, error) {
+	return s.repo.GetEveryUser()
+}

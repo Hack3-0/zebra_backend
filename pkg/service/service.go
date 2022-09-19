@@ -47,6 +47,7 @@ type User interface {
 	GetUserOrders(id int) ([]*model.Order, error)
 	IncreaseCups(id, coffeeNum int) error
 	GetNotifications(id int) ([]*model.Notification, error)
+	GetEveryUser() ([]int, []string, error)
 }
 
 type Menu interface {

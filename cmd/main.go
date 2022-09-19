@@ -61,7 +61,7 @@ func main() {
 	go repos.Cashier.UpdateSession()
 	fService := fcmService.NewFcmService(repos, fcmClient, db)
 	service := service.NewService(repos, fService)
-	handlers := handler.NewHandler(service)
+	handlers := handler.NewHandler(service, fService.Push, fService.Local)
 	staticHandler := handler.NewStaticHandler(service)
 
 	srv := new(zebra.Server)
