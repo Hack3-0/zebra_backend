@@ -13,31 +13,6 @@
                                 "type" : "headAdmin",
                                 "preference" : null,
                                 "organizationID" : 0
-                        },
-                        {
-                                "id": 1,
-                                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjM0MjA3MDEsInVzZXJJZCI6MX0.awm9eY6mg2olhRO8qX5g2MR1L_2CopUowiDjHPNezKc",
-                                "pushToken": "",
-                                "username": "Zebara",
-                                "passsword": "123",
-                                "phoneNumber": "87475842105",
-                                "type": "user",
-                                "preference": {
-                                "sugar": true,
-                                "coffeeType": [
-                                        1,
-                                        2,
-                                        3
-                                ],
-                                "snack": [
-                                        1
-                                ],
-                                "milk": [
-                                        2,
-                                        3
-                                ]
-                                },
-                                "organizationID": 1
                         }
                 ]
         },
@@ -53,7 +28,7 @@
                                 "cost" : 665,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-4090375077.jpeg",
                                 "hide":false
                         },
                         {
@@ -65,7 +40,7 @@
                                 "cost" : 490,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-4281338798.jpeg",
                                 "hide":false
                         },
                         {
@@ -77,7 +52,7 @@
                                 "cost":665,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-3449673936.jpeg",
                                 "hide":false
                         },
                         {
@@ -89,7 +64,7 @@
                                 "cost" : 553,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-203232305.jpeg",
                                 "hide":false
                         },
                         {
@@ -101,7 +76,7 @@
                                 "cost" : 595,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-46480641.jpeg",
                                 "hide":false
                         },
                         {
@@ -113,7 +88,7 @@
                                 "cost" : 595,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-2713906005.jpeg",
                                 "hide":false
                         },
                         {
@@ -125,7 +100,7 @@
                                 "cost" : 525,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-1524018786.jpeg",
                                 "hide":false
                         },
                         {
@@ -137,7 +112,7 @@
                                 "cost" : 525,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-2211974443.jpeg",
                                 "hide":false
                         },
                         {
@@ -149,7 +124,7 @@
                                 "cost" : 560,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-2279401961.jpeg",
                                 "hide":false
                         },
                         {
@@ -161,7 +136,7 @@
                                 "cost" : 560,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-3249099798.jpeg",
                                 "hide":false
                         },
                         {
@@ -173,7 +148,7 @@
                                 "cost" : 525,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-1892315441.jpeg",
                                 "hide":false
                         },
                         {
@@ -185,7 +160,7 @@
                                 "cost" : 770,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-1893257640.jpeg",
                                 "hide":false
                         },
                         {
@@ -197,7 +172,7 @@
                                 "cost" : 830,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-2178262790.jpeg",
                                 "hide":false
                         },
                         {
@@ -209,7 +184,7 @@
                                 "cost" : 1043,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-2229612448.jpeg",
                                 "hide":false
                         },
                         {
@@ -221,7 +196,7 @@
                                 "cost" : 1043,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-1960355279.jpeg",
                                 "hide":false
                         },
                         {
@@ -233,7 +208,7 @@
                                 "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-2204007754.jpeg",
                                 "hide":false
                         },
                         {
@@ -245,7 +220,7 @@
                                 "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-1033051989.jpeg",
                                 "hide":false
                         },
                         {
@@ -257,7 +232,7 @@
                                 "cost" : 200,
                                 "discount":0.0,
                                 "hasSugar":true,
-                                "image":"none",
+                                "image":"upload-623991711.jpeg",
                                 "hide":false
                         }
 
