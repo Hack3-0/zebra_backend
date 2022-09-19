@@ -54,6 +54,14 @@ func (h *Handler) makeOrder(c *gin.Context) {
 		return
 	}
 
+	coffeeNum := 0
+	for _, item := range reqOrder.Items {
+		if item.Category == "coffee" {
+			coffeeNum++
+		}
+	}
+	err = h.services.User.IncreaseCups(reqOrder.UserID, coffeeNum)
+
 	sendSuccess(c)
 }
 

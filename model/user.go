@@ -23,6 +23,8 @@ type User struct {
 	Type         string             `json:"type" bson:"type"`
 	Preference   *Preference        `json:"preference" bson:"preference"`
 	Organization *ShortOrganization `json:"organization" bson:"organization"`
+	Discount     float32            `json:"discount" bson:"discount"`
+	Cups         int                `json:"cups" bson:"cups"`
 }
 
 type Preference struct {

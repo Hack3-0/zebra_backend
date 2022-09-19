@@ -33,3 +33,7 @@ func (s *UserService) GetUserOrders(id int) ([]*model.Order, error) {
 
 	return orders, nil
 }
+
+func (s *UserService) IncreaseCups(id, coffeeNum int) error {
+	return s.repo.IncreaseCups(id, coffeeNum)
+}

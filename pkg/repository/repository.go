@@ -46,6 +46,7 @@ type User interface {
 	GetUserByID(id int) (*model.User, error)
 	ChangeOrganization(id int, org model.ShortOrganization) error
 	GetUserOrders(id int) ([]*model.Order, error)
+	IncreaseCups(id, coffeeNum int) error
 }
 
 type Admin interface {

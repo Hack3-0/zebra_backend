@@ -72,3 +72,23 @@ func (s *UserMongo) GetUserOrders(id int) ([]*model.Order, error) {
 
 	return orders, nil
 }
+
+func (s *UserMongo) IncreaseCups(id, coffeeNum int) error {
+	collection := s.db.Collection(collectionUser)
+
+	res, err := collection.UpdateOne(
+		context.TODO(),
+		bson.M{"id": id, "type": utils.TypeUser},
+		bson.M{"$inc": bson.M{"cups": coffeeNum}},
+	)
+
+	if err != nil {
+		return err
+	}
+
+	if res.ModifiedCount == 0 {
+		return errors.New("not found")
+	}
+
+	return nil
+}

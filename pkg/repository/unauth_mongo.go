@@ -49,7 +49,12 @@ func (r *UnauthMongo) CreateUser(user model.ReqUserRegistration) error {
 	newUser.Password = user.Password
 	newUser.PhoneNumber = user.PhoneNumber
 	newUser.Name = user.Name
-
+	if user.PhoneNumber == "" {
+		newUser.Discount = utils.FullDiscount
+	} else {
+		newUser.Discount = utils.AnonDiscount
+	}
+	newUser.Cups = 0
 	// TODO: if googleAvatar is empty, set default random image
 
 	_, err := usersCollection.InsertOne(

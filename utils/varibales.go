@@ -8,4 +8,6 @@ const (
 	TypeHeadAdmin = "headAdmin"
 	Pending       = "pending"
 	Complete      = "complete"
+	FullDiscount  = 0.15
+	AnonDiscount  = 0.05
 )
