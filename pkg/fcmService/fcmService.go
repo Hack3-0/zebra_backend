@@ -1,6 +1,7 @@
 package fcmService
 
 import (
+	"zebra/model"
 	"zebra/pkg/repository"
 
 	"github.com/appleboy/go-fcm"
@@ -8,10 +9,11 @@ import (
 )
 
 type Push interface {
-	SendPushNotification(TakerID int, notificationType string) error
+	SendPushNotification(TakerID int, text, title string) error
 }
 
 type Local interface {
+	CreateNotification(data *model.Notification) (*model.Notification, error)
 }
 
 type FcmService struct {

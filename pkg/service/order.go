@@ -1,10 +1,12 @@
 package service
 
 import (
+	"strconv"
 	"time"
 	"zebra/model"
 	"zebra/pkg/fcmService"
 	"zebra/pkg/repository"
+	"zebra/utils"
 )
 
 type OrderService struct {
@@ -36,7 +38,26 @@ func (s *OrderService) GetNewOrderID() (int, error) {
 }
 
 func (s *OrderService) ChangeOrderStatus(id, cashID int) error {
-	return s.repo.ChangeOrderStatus(id, cashID)
+	err := s.repo.ChangeOrderStatus(id, cashID)
+	if err != nil {
+		return err
+	}
+	order, err := s.repo.GetOrderByID(id)
+	if err != nil {
+		return err
+	}
+
+	notification := model.Notification{}
+	notification.UserID = order.UserID
+	notification.Title = utils.CompleteTitle
+	notification.Text = utils.CompleteTextBegin + strconv.Itoa(order.ID) + utils.CompleteTextEnd
+	_, err = s.localService.CreateNotification(&notification)
+	if err != nil {
+		return err
+	}
+
+	go s.pushService.SendPushNotification(notification.UserID, notification.Text, notification.Title)
+	return nil
 }
 
 func (s *OrderService) CreateFeedback(req model.ReqFeedback) error {

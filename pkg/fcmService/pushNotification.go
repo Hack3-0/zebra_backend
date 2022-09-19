@@ -18,7 +18,7 @@ func NewPushService(repo repository.PushNotification, fcmClient *fcm.Client) *Pu
 	return &PushService{repo: repo, fcmClient: fcmClient}
 }
 
-func (s *PushService) SendPushNotification(TakerID int, notificationType string) error {
+func (s *PushService) SendPushNotification(TakerID int, text, title string) error {
 
 	pushToken, err := s.repo.GetPushToken(TakerID)
 	if err != nil {
@@ -28,13 +28,11 @@ func (s *PushService) SendPushNotification(TakerID int, notificationType string)
 		logrus.Print("empty pushToken")
 		return nil
 	}
-	mesTitle := "Your order is ready"
-	mes := "Your order is ready"
 	msg := &fcm.Message{
 		To: pushToken,
 		Notification: &fcm.Notification{
-			Title:       mesTitle,
-			Body:        mes,
+			Title:       title,
+			Body:        text,
 			ClickAction: "FLUTTER_NOTIFICATION_CLICK",
 		},
 	}

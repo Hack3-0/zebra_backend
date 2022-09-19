@@ -2,16 +2,6 @@ package model
 
 import "time"
 
-type Notifications struct {
-	Id     int       `json:"id" bson:"id"`
-	UserId int       `json:"userId" bson:"userId"`
-	Type   string    `json:"type" bson:"type"`
-	Title  string    `json:"title,omitempty" bson:"title,omitempty"`
-	Text   string    `json:"text,omitempty" bson:"text,omitempty"`
-	Time   time.Time `json:"time" bson:"time"`
-	Seen   bool      `json:"seen" bson:"seen"`
-}
-
 type User struct {
 	ID           int                `json:"id" bson:"id"`
 	Token        string             `json:"token" bson:"token"`
