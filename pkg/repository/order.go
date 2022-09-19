@@ -148,7 +148,7 @@ func (s *OrderMongo) GetOrders(id int) ([]*model.Order, error) {
 		return nil, err
 	}
 
-	if err := cursor.All(context.TODO(), orders); err != nil {
+	if err := cursor.All(context.TODO(), &orders); err != nil {
 		return nil, err
 	}
 
