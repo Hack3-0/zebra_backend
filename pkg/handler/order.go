@@ -60,11 +60,12 @@ func (h *Handler) makeOrder(c *gin.Context) {
 			coffeeNum++
 		}
 	}
-	log.Print(reqOrder.UserID, reqOrder.Items)
-	err = h.services.User.IncreaseCups(reqOrder.UserID, coffeeNum)
-	if err != nil {
-		defaultErrorHandler(c, err)
-		return
+	if coffeeNum > 0 {
+		err = h.services.User.IncreaseCups(reqOrder.UserID, coffeeNum)
+		if err != nil {
+			defaultErrorHandler(c, err)
+			return
+		}
 	}
 
 	sendSuccess(c)

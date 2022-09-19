@@ -72,7 +72,7 @@ func (h *Handler) signIn(c *gin.Context) {
 		defaultErrorHandler(c, errors.New("username or password is wrong"))
 		return
 	}
-
+	log.Print(reqData.PushToken)
 	h.services.SetPushToken(reqData.Username, reqData.PushToken)
 
 	AllUser := model.AllUser{
