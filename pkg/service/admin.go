@@ -117,7 +117,7 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 }
 
 func (s *AdminService) GetFeedback(id int) (*model.StatFeedback, error) {
-	var feedbacks *model.StatFeedback
+	var feedbacks model.StatFeedback
 	org, err := s.repo.GetOrgByID(id)
 	if err != nil {
 		return nil, err
@@ -137,5 +137,5 @@ func (s *AdminService) GetFeedback(id int) (*model.StatFeedback, error) {
 	feedbacks.Rating = rating
 	feedbacks.Feedback = feedback
 
-	return feedbacks, nil
+	return &feedbacks, nil
 }
