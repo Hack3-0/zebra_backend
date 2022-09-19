@@ -37,3 +37,7 @@ func (s *UserService) GetUserOrders(id int) ([]*model.Order, error) {
 func (s *UserService) IncreaseCups(id, coffeeNum int) error {
 	return s.repo.IncreaseCups(id, coffeeNum)
 }
+
+func (s *UserService) GetNotifications(id int) ([]*model.Notification, error) {
+	return s.repo.GetNotifications(id)
+}

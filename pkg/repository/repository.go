@@ -47,6 +47,7 @@ type User interface {
 	ChangeOrganization(id int, org model.ShortOrganization) error
 	GetUserOrders(id int) ([]*model.Order, error)
 	IncreaseCups(id, coffeeNum int) error
+	GetNotifications(id int) ([]*model.Notification, error)
 }
 
 type Admin interface {

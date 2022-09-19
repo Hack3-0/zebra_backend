@@ -92,3 +92,28 @@ func (s *UserMongo) IncreaseCups(id, coffeeNum int) error {
 
 	return nil
 }
+
+func (s *UserMongo) GetNotifications(id int) ([]*model.Notification, error) {
+	collection := s.db.Collection(collectionNotification)
+
+	var notifications []*model.Notification
+
+	cursor, err := collection.Find(
+		context.TODO(),
+		bson.M{"userID": id},
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &notifications); err != nil {
+		return nil, err
+	}
+
+	if len(notifications) == 0 {
+		notifications = []*model.Notification{}
+	}
+
+	return notifications, nil
+}
