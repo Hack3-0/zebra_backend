@@ -105,7 +105,7 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 
 	}
 	sort.Slice(res.ProductStat, func(i, j int) bool {
-		return res.ProductStat[i].Revenue > res.ProductStat[j].Revenue
+		return res.ProductStat[i].Quantity > res.ProductStat[j].Quantity
 	})
 	admin, err := s.repo.GetOrgByID(id)
 	if err != nil {
