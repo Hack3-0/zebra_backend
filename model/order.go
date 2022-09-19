@@ -13,9 +13,10 @@ type Order struct {
 }
 
 type FeedBack struct {
-	ID      int    `json:"id" bson:"id"`
-	UserID  int    `json:"userID" bson:"userID"`
-	OrderID int    `json:"orderID" bson:"orderID"`
-	Text    string `json:"text" bson:"text"`
-	Rating  int    `json:"rating" bson:"rating"`
+	ID             int    `json:"id" bson:"id"`
+	UserID         int    `json:"userID" bson:"userID"`
+	OrderID        int    `json:"orderID" bson:"orderID"`
+	OrganizationID int    `json:"organizationID" bson:"organizationID"`
+	Text           string `json:"text" bson:"text"`
+	Rating         int    `json:"rating" bson:"rating"`
 }

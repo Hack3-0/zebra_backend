@@ -4,6 +4,7 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"strconv"
 	"zebra/model"
 
 	"github.com/gin-gonic/gin"
@@ -131,4 +132,21 @@ func (h *Handler) getStatistics(c *gin.Context) {
 		sendGeneral(statistics, c)
 	}
 
+}
+
+func (h *Handler) getFeedback(c *gin.Context) {
+	keys := c.Request.URL.Query()["id"]
+	id, err := strconv.Atoi(keys[0])
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	feedback, err := h.services.Admin.GetFeedback(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	sendGeneral(feedback, c)
 }

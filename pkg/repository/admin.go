@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"log"
+	"math"
 	"time"
 	"zebra/model"
 	"zebra/utils"
@@ -218,4 +219,56 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, []*model
 	}
 
 	return totalRev, totalCost, popular, nil
+}
+
+func (s *AdminMongo) GetAllFeedback() ([]*model.FeedBack, error) {
+	col := s.db.Collection(collectionFeedback)
+	var feedback []*model.FeedBack
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{},
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &feedback); err != nil {
+		return nil, err
+	}
+
+	return feedback, nil
+}
+
+func (s *AdminMongo) GetFeedback(id int) (float32, []*model.FeedBack, error) {
+	col := s.db.Collection(collectionFeedback)
+	var feedback []*model.FeedBack
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"organizationID": id},
+	)
+	if err != nil {
+		return 0.0, nil, err
+	}
+
+	if err := cursor.All(context.TODO(), &feedback); err != nil {
+		return 0.0, nil, err
+	}
+	i := 0
+	sum := 0
+	for _, item := range feedback {
+		i++
+		sum = sum + item.Rating
+	}
+	rating := float64(sum) / float64(i)
+
+	return float32(toFixed(rating, 1)), feedback, nil
+}
+
+func round(num float64) int {
+	return int(num + math.Copysign(0.5, num))
+}
+
+func toFixed(num float64, precision int) float64 {
+	output := math.Pow(10, float64(precision))
+	return float64(round(num*output)) / output
 }

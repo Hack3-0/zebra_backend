@@ -124,7 +124,7 @@ func (s *OrderMongo) ChangeOrderStatus(id, cashID int) error {
 func (s *OrderMongo) CreateFeedback(req model.ReqFeedback) error {
 	col := s.db.Collection(collectionFeedback)
 
-	newFeedback := &model.FeedBack{ID: req.ID, UserID: req.UserID, OrderID: req.OrderID, Text: req.Text, Rating: req.Rating}
+	newFeedback := &model.FeedBack{ID: req.ID, UserID: req.UserID, OrderID: req.OrderID, OrganizationID: req.OrganizationID, Text: req.Text, Rating: req.Rating}
 
 	_, err := col.InsertOne(
 		context.TODO(),

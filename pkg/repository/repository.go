@@ -57,6 +57,7 @@ type Admin interface {
 	AddCashier(id, newID int) error
 	CreateHeadAdmin(token, password, username, userType string) error
 	GetRevenue(id int, timeStamp time.Time) (int, int, []*model.StatMenu, error)
+	GetFeedback(id int) (float32, []*model.FeedBack, error)
 }
 type Cashier interface {
 	CreateCash(data model.ReqCashRegistration) error

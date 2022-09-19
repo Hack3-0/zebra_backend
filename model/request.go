@@ -174,11 +174,12 @@ func (p *ReqTime) ParseRequest(c *gin.Context) error {
 }
 
 type ReqFeedback struct {
-	ID      int
-	UserID  int
-	OrderID int    `json:"orderID" bson:"orderID"`
-	Text    string `json:"text" bson:"text"`
-	Rating  int    `json:"rating" bson:"rating"`
+	ID             int
+	UserID         int
+	OrderID        int    `json:"orderID" bson:"orderID"`
+	OrganizationID int    `json:"organizationID" bson:"organizationID"`
+	Text           string `json:"text" bson:"text"`
+	Rating         int    `json:"rating" bson:"rating"`
 }
 
 func (p *ReqFeedback) ParseRequest(c *gin.Context) error {

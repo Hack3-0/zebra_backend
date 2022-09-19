@@ -28,6 +28,7 @@ type Admin interface {
 	AddCashier(id, newID int) error
 	GetStatistics(id int, timeStamp time.Time) (*model.Statistics, error)
 	GetAllStatistics(timeStamp time.Time) ([]*model.Statistics, error)
+	GetFeedback(id int) (*model.StatFeedback, error)
 }
 
 type Cashier interface {

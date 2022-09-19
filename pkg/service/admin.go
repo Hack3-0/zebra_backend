@@ -115,3 +115,23 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 
 	return &res, nil
 }
+
+func (s *AdminService) GetFeedback(id int) (*model.StatFeedback, error) {
+	var feedbacks *model.StatFeedback
+	org, err := s.repo.GetOrgByID(id)
+	if err != nil {
+		return nil, err
+	}
+	feedbacks.Organization = &model.ShortOrganization{ID: org.ID, Address: org.Address, Name: org.Name}
+	rating, feedback, err := s.repo.GetFeedback(id)
+	if err != nil {
+		return nil, err
+	}
+	if len(feedback) == 0 {
+		feedback = []*model.FeedBack{}
+	}
+	feedbacks.Rating = rating
+	feedbacks.Feedback = feedback
+
+	return feedbacks, nil
+}

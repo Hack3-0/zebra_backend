@@ -25,3 +25,9 @@ type Statistics struct {
 	Margin      float32     `json:"margin" bson:"margin"`
 	ProductStat []*StatMenu `json:"productStat" bson:"productStat"`
 }
+
+type StatFeedback struct {
+	Organization *ShortOrganization `json:"organization" bson:"organization"`
+	Rating       float32            `json:"rating" bson:"rating"`
+	Feedback     []*FeedBack        `json:"feedback" bson:"feedback"`
+}
