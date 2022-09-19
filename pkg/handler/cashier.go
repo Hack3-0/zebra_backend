@@ -28,7 +28,8 @@ func (h *Handler) signUpCash(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-	reqCash.Organization = org
+
+	reqCash.Organization = &model.ShortOrganization{ID: org.ID, Name: org.Name, Address: org.Address}
 	log.Print(id)
 	if err = h.services.Unauthed.CheckUsername(reqCash.Username); err == nil {
 		defaultErrorHandler(c, errors.New("username is already taken"))

@@ -182,7 +182,7 @@ func (s *CashierMongo) GetCashiers(id int) ([]*model.Cashier, error) {
 
 	cursor, err := col.Find(
 		context.TODO(),
-		bson.M{"type": utils.TypeCashier, "organizationID": id},
+		bson.M{"type": utils.TypeCashier, "organization.ID": id},
 	)
 	if id == 0 {
 		cursor, err = col.Find(
