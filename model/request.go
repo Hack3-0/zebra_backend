@@ -26,24 +26,6 @@ func (p *ReqID) ParseRequest(c *gin.Context) error {
 	return nil
 }
 
-// ReqIDPage struct
-type ReqIDPage struct {
-	ID   int `json:"id" `
-	Page int `json:"page"`
-}
-
-func (p *ReqIDPage) ParseRequest(c *gin.Context) error {
-	if err := c.ShouldBindWith(&p, binding.JSON); err != nil {
-		return errors.New("bad request | " + err.Error())
-	}
-
-	if p.ID == 0 || p.Page == 0 {
-		return errors.New("bad request | id & page is required")
-	}
-
-	return nil
-}
-
 // ReqIDString struct
 type ReqIDString struct {
 	ID string `json:"id" bson:"id"`
@@ -56,29 +38,6 @@ func (p *ReqIDString) ParseRequest(c *gin.Context) error {
 
 	if p.ID == "" {
 		return errors.New("bad request | id is required")
-	}
-
-	return nil
-}
-
-// ReqFeedLikedUsers
-type ReqFeedLikedUsers struct {
-	ID     string `json:"id" bson:"id"`
-	Page   int    `json:"page" bson:"page"`
-	Search string `json:"search" bson:"search"`
-}
-
-func (p *ReqFeedLikedUsers) ParseRequest(c *gin.Context) error {
-	if err := c.BindJSON(&p); err != nil {
-		return errors.New("bad request | " + err.Error())
-	}
-
-	if p.ID == "" {
-		return errors.New("bad request | id is required")
-	}
-
-	if p.Page == 0 {
-		return errors.New("bad request | page is required")
 	}
 
 	return nil
@@ -212,4 +171,24 @@ type ReqTime struct {
 
 func (p *ReqTime) ParseRequest(c *gin.Context) error {
 	return c.ShouldBindWith(&p, binding.JSON)
+}
+
+type ReqFeedback struct {
+	ID      int
+	UserID  int
+	OrderID int    `json:"orderID" bson:"orderID"`
+	Text    string `json:"text" bson:"text"`
+	Rating  int    `json:"rating" bson:"rating"`
+}
+
+func (p *ReqFeedback) ParseRequest(c *gin.Context) error {
+	if err := c.ShouldBindWith(&p, binding.JSON); err != nil {
+		return errors.New("bad request | " + err.Error())
+	}
+
+	if p.UserID == 0 || p.OrderID == 0 || p.Rating == 0 {
+		return errors.New("bad request | empty fields")
+	}
+
+	return nil
 }

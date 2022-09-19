@@ -49,3 +49,30 @@ func (s *LocalNotificationMongo) GetNotifications(id int) ([]*model.Notification
 
 	return notifications, nil
 }
+
+func (s *LocalNotificationMongo) GetNewNotificationID() (int, error) {
+	collection := s.db.Collection(collectionNotification)
+	var resID []*model.ReqID
+	var newId int
+
+	cursor, err := collection.Aggregate(context.TODO(), []bson.M{
+		{"$group": bson.M{"_id": nil, "id": bson.M{"$max": "$id"}}}},
+	)
+
+	if err != nil { //Case aggregation with unwind gives error
+		return 1, nil
+	}
+
+	if err = cursor.All(context.TODO(), &resID); err != nil {
+		return 1, nil //Case aggregation with unwind gives error
+	}
+
+	if len(resID) > 0 {
+		newId = resID[0].ID
+		newId++
+	} else {
+		newId = 1
+	}
+
+	return newId, nil
+}

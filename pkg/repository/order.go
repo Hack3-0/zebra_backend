@@ -79,6 +79,32 @@ func (s *OrderMongo) GetNewOrderID() (int, error) {
 
 	return newId, nil
 }
+func (s *OrderMongo) GetNewFeedbackID() (int, error) {
+	collection := s.db.Collection(collectionFeedback)
+	var resID []*model.ReqID
+	var newId int
+
+	cursor, err := collection.Aggregate(context.TODO(), []bson.M{
+		{"$group": bson.M{"_id": nil, "id": bson.M{"$max": "$id"}}}},
+	)
+
+	if err != nil { //Case aggregation with unwind gives error
+		return 1, nil
+	}
+
+	if err = cursor.All(context.TODO(), &resID); err != nil {
+		return 1, nil //Case aggregation with unwind gives error
+	}
+
+	if len(resID) > 0 {
+		newId = resID[0].ID
+		newId++
+	} else {
+		newId = 1
+	}
+
+	return newId, nil
+}
 
 func (s *OrderMongo) ChangeOrderStatus(id int) error {
 	col := s.db.Collection(collectionOrders)
@@ -93,4 +119,17 @@ func (s *OrderMongo) ChangeOrderStatus(id int) error {
 	}
 
 	return nil
+}
+
+func (s *OrderMongo) CreateFeedback(req model.ReqFeedback) error {
+	col := s.db.Collection(collectionFeedback)
+
+	newFeedback := &model.FeedBack{ID: req.ID, UserID: req.UserID, OrderID: req.OrderID, Text: req.Text, Rating: req.Rating}
+
+	_, err := col.InsertOne(
+		context.TODO(),
+		newFeedback,
+	)
+
+	return err
 }

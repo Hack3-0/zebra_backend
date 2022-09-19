@@ -19,5 +19,10 @@ func NewLocalService(repo repository.LocalNotification, fcmClient *fcm.Client) *
 
 func (s *LocalService) CreateNotification(data *model.Notification) (*model.Notification, error) {
 	data.Time = time.Now()
+	id, err := s.repo.GetNewNotificationID()
+	if err != nil {
+		return nil, err
+	}
+	data.ID = id
 	return s.repo.CreateNotification(data)
 }

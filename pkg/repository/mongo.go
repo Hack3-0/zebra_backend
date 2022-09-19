@@ -19,6 +19,7 @@ const (
 	collectionOrders       = "order"
 	collectionMenu         = "menu"
 	collectionNotification = "notification"
+	collectionFeedback     = "feedback"
 )
 
 func NewMongoDB(cfg Config) (*mongo.Database, *mongo.Client, error) {

@@ -62,6 +62,7 @@ type Order interface {
 	CreateOrder(data model.ReqOrder) error
 	GetOrderByID(id int) (*model.Order, error)
 	GetNewOrderID() (int, error)
+	CreateFeedback(req model.ReqFeedback) error
 	ChangeOrderStatus(id int) error
 }
 type Service struct {

@@ -61,6 +61,10 @@ func (h *Handler) makeOrder(c *gin.Context) {
 		}
 	}
 	err = h.services.User.IncreaseCups(reqOrder.UserID, coffeeNum)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
 
 	sendSuccess(c)
 }
@@ -80,4 +84,31 @@ func (h *Handler) changeOrderStatus(c *gin.Context) {
 		return
 	}
 	sendSuccess(c)
+}
+
+func (h *Handler) createFeedback(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	var ReqFeed model.ReqFeedback
+
+	err = ReqFeed.ParseRequest(c)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	ReqFeed.UserID = id
+
+	err = h.services.Order.CreateFeedback(ReqFeed)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	sendGeneral(ReqFeed, c)
 }

@@ -35,3 +35,13 @@ func (s *OrderService) GetNewOrderID() (int, error) {
 func (s *OrderService) ChangeOrderStatus(id int) error {
 	return s.repo.ChangeOrderStatus(id)
 }
+
+func (s *OrderService) CreateFeedback(req model.ReqFeedback) error {
+	feedbackID, err := s.repo.GetNewFeedbackID()
+	if err != nil {
+		return err
+	}
+
+	req.ID = feedbackID
+	return s.repo.CreateFeedback(req)
+}

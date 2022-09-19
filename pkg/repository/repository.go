@@ -70,12 +70,15 @@ type Cashier interface {
 }
 type LocalNotification interface {
 	CreateNotification(data *model.Notification) (*model.Notification, error)
+	GetNewNotificationID() (int, error)
 }
 type Order interface {
 	CreateOrder(data model.ReqOrder) error
 	GetOrderByID(id int) (*model.Order, error)
 	GetNewOrderID() (int, error)
 	ChangeOrderStatus(id int) error
+	GetNewFeedbackID() (int, error)
+	CreateFeedback(req model.ReqFeedback) error
 }
 
 type Repository struct {
