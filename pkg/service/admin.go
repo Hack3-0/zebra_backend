@@ -123,7 +123,11 @@ func (s *AdminService) GetFeedback(id int) (*model.StatFeedback, error) {
 		return nil, err
 	}
 	feedbacks.Organization = &model.ShortOrganization{ID: org.ID, Address: org.Address, Name: org.Name}
+	log.Printf("Org %v", feedbacks.Organization)
+
 	rating, feedback, err := s.repo.GetFeedback(id)
+	log.Printf("rating %v, feedback  %v", rating, feedback)
+
 	if err != nil {
 		return nil, err
 	}

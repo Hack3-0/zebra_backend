@@ -141,7 +141,7 @@ func (h *Handler) getFeedback(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
-
+	log.Printf("Id %v", id)
 	feedback, err := h.services.Admin.GetFeedback(id)
 	if err != nil {
 		defaultErrorHandler(c, err)
