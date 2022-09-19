@@ -165,7 +165,9 @@ func (h *Handler) sendAll(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
+	log.Print(users, pushTokens)
+
 	h.localService.CreateNotificationAll(realNotification, users)
-	h.pushService.SendPushNotificationAll(pushTokens, notification.Text, notification.Title)
+	go h.pushService.SendPushNotificationAll(pushTokens, notification.Text, notification.Title)
 	sendSuccess(c)
 }
