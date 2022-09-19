@@ -92,7 +92,11 @@ func (s *AdminService) GetStatistics(id int, timeStamp time.Time) (*model.Statis
 	log.Print(revenue, cost, popular)
 	res.ID = id
 	res.Revenue = revenue
-	res.Margin = float32(revenue-cost) / float32(revenue) * float32(100)
+	if revenue == 0 {
+		res.Margin = 0
+	} else {
+		res.Margin = float32(revenue-cost) / float32(revenue) * float32(100)
+	}
 	res.PopularProduct = popular
 	admin, err := s.repo.GetOrgByID(id)
 	if err != nil {
