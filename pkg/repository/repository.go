@@ -56,7 +56,7 @@ type Admin interface {
 	GetOrganizations() ([]*model.Organization, error)
 	AddCashier(id, newID int) error
 	CreateHeadAdmin(token, password, username, userType string) error
-	GetRevenue(id int, timeStamp time.Time) (int, int, *model.MenuItem, error)
+	GetRevenue(id int, timeStamp time.Time) (int, int, []*model.StatMenu, error)
 }
 type Cashier interface {
 	CreateCash(data model.ReqCashRegistration) error

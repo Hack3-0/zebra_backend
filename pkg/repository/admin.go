@@ -162,7 +162,7 @@ func (s *AdminMongo) CreateHeadAdmin(token, password, username, userType string)
 	return nil
 }
 
-func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.MenuItem, error) {
+func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, []*model.StatMenu, error) {
 	col := s.db.Collection(collectionOrders)
 	var orders []*model.Order
 	cursor, err := col.Find(
@@ -179,7 +179,8 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.M
 	log.Print(orders)
 	totalRev := 0
 	totalCost := 0
-
+	costMap := make(map[int]int, 0)
+	revMap := make(map[int]int, 0)
 	countMap := make(map[int]int, 0)
 	if len(orders) == 0 {
 		return 0, 0, nil, nil
@@ -188,6 +189,16 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.M
 		for _, item := range order.Items {
 			totalRev = totalRev + item.Price
 			totalCost = totalCost + item.Cost
+			if _, exists := costMap[item.ID]; exists {
+				costMap[item.ID] = costMap[item.ID] + item.Cost
+			} else {
+				costMap[item.ID] = item.Cost
+			}
+			if _, exists := revMap[item.ID]; exists {
+				revMap[item.ID] = revMap[item.ID] + item.Price
+			} else {
+				revMap[item.ID] = item.Price
+			}
 			if _, exists := countMap[item.ID]; exists {
 				countMap[item.ID] = countMap[item.ID] + 1
 			} else {
@@ -195,20 +206,15 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, *model.M
 			}
 		}
 	}
-	max := -1
-	maxIndex := -1
+	popular := make([]*model.StatMenu, 0)
+
 	for key, val := range countMap {
-		if val > max {
-			maxIndex = key
-		}
+		newItem := &model.StatMenu{ID: key, Quantity: val}
+		popular = append(popular, newItem)
 	}
-	var popular *model.MenuItem
-	for _, order := range orders {
-		for _, item := range order.Items {
-			if item.ID == maxIndex {
-				popular = item
-			}
-		}
+	for key, val := range popular {
+		popular[key].Revenue = revMap[val.ID]
+		popular[key].Cost = costMap[val.ID]
 	}
 
 	return totalRev, totalCost, popular, nil

@@ -19,9 +19,9 @@ type ShortOrganization struct {
 }
 
 type Statistics struct {
-	ID             int       `json:"id" bson:"id"`
-	Address        string    `json:"address" bson:"address"`
-	Revenue        int       `json:"revenue" bson:"revenue"`
-	Margin         float32   `json:"margin" bson:"margin"`
-	PopularProduct *MenuItem `json:"menuItem" bson:"menuItem"`
+	ID          int         `json:"id" bson:"id"`
+	Address     string      `json:"address" bson:"address"`
+	Revenue     int         `json:"revenue" bson:"revenue"`
+	Margin      float32     `json:"margin" bson:"margin"`
+	ProductStat []*StatMenu `json:"productStat" bson:"productStat"`
 }
