@@ -45,3 +45,7 @@ func (s *OrderService) CreateFeedback(req model.ReqFeedback) error {
 	req.ID = feedbackID
 	return s.repo.CreateFeedback(req)
 }
+
+func (s *OrderService) GetOrders(id int) ([]*model.Order, error) {
+	return s.repo.GetOrders(id)
+}

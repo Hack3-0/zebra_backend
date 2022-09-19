@@ -64,6 +64,7 @@ type Order interface {
 	GetNewOrderID() (int, error)
 	CreateFeedback(req model.ReqFeedback) error
 	ChangeOrderStatus(id int) error
+	GetOrders(id int) ([]*model.Order, error)
 }
 type Service struct {
 	Unauthed

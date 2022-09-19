@@ -133,3 +133,29 @@ func (s *OrderMongo) CreateFeedback(req model.ReqFeedback) error {
 
 	return err
 }
+
+func (s *OrderMongo) GetOrders(id int) ([]*model.Order, error) {
+	col := s.db.Collection(collectionOrders)
+
+	var orders []*model.Order
+
+	cursor, err := col.Find(
+		context.TODO(),
+		bson.M{"organizationID": id},
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if err := cursor.All(context.TODO(), orders); err != nil {
+		return nil, err
+	}
+
+	if len(orders) == 0 {
+		orders = []*model.Order{}
+	}
+
+	return orders, nil
+
+}

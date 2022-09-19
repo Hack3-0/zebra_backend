@@ -112,3 +112,25 @@ func (h *Handler) createFeedback(c *gin.Context) {
 
 	sendGeneral(ReqFeed, c)
 }
+
+func (h *Handler) getOrders(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	cashier, err := h.services.GetCashByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	orders, err := h.services.Order.GetOrders(cashier.Organization.ID)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	sendGeneral(orders, c)
+}

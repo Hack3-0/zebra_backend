@@ -79,6 +79,7 @@ type Order interface {
 	ChangeOrderStatus(id int) error
 	GetNewFeedbackID() (int, error)
 	CreateFeedback(req model.ReqFeedback) error
+	GetOrders(id int) ([]*model.Order, error)
 }
 
 type Repository struct {
