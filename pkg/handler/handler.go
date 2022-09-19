@@ -52,6 +52,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 				headAdmin.POST("/updateMenuItem", h.updateMenuItem)
 				headAdmin.POST("/signup", h.signUpOrg)
 				headAdmin.POST("/createMenuItem", h.createMenuItem)
+				headAdmin.POST("/getMenuItem", h.getMenuItem)
 			}
 		}
 	}

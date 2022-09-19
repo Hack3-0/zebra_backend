@@ -52,6 +52,10 @@ func (s *MenuService) DeleteMenuItem(id int) error {
 	return s.repo.DeleteMenuItem(id)
 }
 
+func (s *MenuService) GetMenuItem(id int) (*model.MenuItem, error) {
+	return s.repo.GetMenuItemByID(id)
+}
+
 func (s *MenuService) UpdateMenuItem(menu *model.MenuItem) error {
 	return s.repo.UpdateMenuItem(menu)
 }

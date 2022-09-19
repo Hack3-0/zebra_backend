@@ -9,6 +9,22 @@ import (
 	"github.com/gin-gonic/gin/binding"
 )
 
+func (h *Handler) getMenuItem(c *gin.Context) {
+	var id model.ReqID
+	err := id.ParseRequest(c)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	item, err := h.services.Menu.GetMenuItem(id.ID)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+
+	sendGeneral(item, c)
+}
 func (h *Handler) deleteMenuItem(c *gin.Context) {
 	var id model.ReqID
 	err := id.ParseRequest(c)
