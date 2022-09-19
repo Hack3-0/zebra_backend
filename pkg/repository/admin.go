@@ -183,6 +183,7 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, []*model
 	costMap := make(map[int]int, 0)
 	revMap := make(map[int]int, 0)
 	countMap := make(map[int]int, 0)
+	nameMap := make(map[int]string, 0)
 	if len(orders) == 0 {
 		return 0, 0, nil, nil
 	}
@@ -190,6 +191,7 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, []*model
 		for _, item := range order.Items {
 			totalRev = totalRev + item.Price
 			totalCost = totalCost + item.Cost
+			nameMap[item.ID] = item.Name
 			if _, exists := costMap[item.ID]; exists {
 				costMap[item.ID] = costMap[item.ID] + item.Cost
 			} else {
@@ -210,7 +212,7 @@ func (s *AdminMongo) GetRevenue(id int, timeStamp time.Time) (int, int, []*model
 	popular := make([]*model.StatMenu, 0)
 
 	for key, val := range countMap {
-		newItem := &model.StatMenu{ID: key, Quantity: val}
+		newItem := &model.StatMenu{ID: key, Quantity: val, Name: nameMap[key]}
 		popular = append(popular, newItem)
 	}
 	for key, val := range popular {
