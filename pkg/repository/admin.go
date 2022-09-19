@@ -253,11 +253,15 @@ func (s *AdminMongo) GetFeedback(id int) (float32, []*model.FeedBack, error) {
 	if err := cursor.All(context.TODO(), &feedback); err != nil {
 		return 0.0, nil, err
 	}
+	log.Print(feedback)
 	i := 0
 	sum := 0
 	for _, item := range feedback {
 		i++
 		sum = sum + item.Rating
+	}
+	if i == 0 {
+		i = 1
 	}
 	rating := float64(sum) / float64(i)
 
