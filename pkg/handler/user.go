@@ -102,3 +102,20 @@ func (h *Handler) getMenu(c *gin.Context) {
 	}
 	sendGeneral(menu, c)
 }
+
+/*
+func (h *Handler) getNotifications(c *gin.Context) {
+	id, err := getUserId(c)
+
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	notifications, err := h.services.User.getNotifications(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	sendGeneral(menu, c)
+}
+*/
