@@ -33,7 +33,7 @@ func (s *OrderService) GetNewOrderID() (int, error) {
 }
 
 func (s *OrderService) ChangeOrderStatus(id, cashID int) error {
-	return s.repo.ChangeOrderStatus(id)
+	return s.repo.ChangeOrderStatus(id, cashID)
 }
 
 func (s *OrderService) CreateFeedback(req model.ReqFeedback) error {
