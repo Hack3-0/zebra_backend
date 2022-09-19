@@ -40,7 +40,6 @@ type Menu interface {
 	GetMenuCategory(category string) ([]*model.MenuItem, error)
 	DeleteMenuItem(id int) error
 	UpdateMenuItem(menu *model.MenuItem) error
-	GetMenuItem(id int) error
 }
 
 type User interface {
