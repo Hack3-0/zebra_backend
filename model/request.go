@@ -186,7 +186,7 @@ func (p *ReqFeedback) ParseRequest(c *gin.Context) error {
 		return errors.New("bad request | " + err.Error())
 	}
 
-	if p.UserID == 0 || p.OrderID == 0 || p.Rating == 0 {
+	if p.OrderID == 0 || p.Rating == 0 {
 		return errors.New("bad request | empty fields")
 	}
 
