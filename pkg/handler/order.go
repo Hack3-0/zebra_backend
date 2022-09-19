@@ -90,6 +90,7 @@ func (h *Handler) changeOrderStatus(c *gin.Context) {
 		defaultErrorHandler(c, err)
 		return
 	}
+
 	sendSuccess(c)
 }
 

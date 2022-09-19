@@ -81,7 +81,7 @@ func NewService(repos *repository.Repository, fcmService *fcmService.FcmService)
 		User:     NewUserService(repos.User),
 		Admin:    NewAdminService(repos.Admin),
 		Cashier:  NewCashierService(repos.Cashier),
-		Order:    NewOrderService(repos.Order),
+		Order:    NewOrderService(repos.Order, fcmService.Push, fcmService.Local),
 		Menu:     NewMenuService(repos.Menu),
 	}
 }

@@ -12,6 +12,6 @@ type Cashier struct {
 	Organization *ShortOrganization `json:"organization" bson:"organization"`
 	StartTime    *time.Time         `json:"startTime" bson:"startTime"`
 	EndTime      *time.Time         `json:"endTime" bson:"endTime"`
-	HoursWorked  float32            `json:"hoursWorked" bson:"hoursWorked"`
+	HoursWorked  float32            `json:"hoursWorked" bson:"hoursWorked,truncate"`
 	Active       bool               `json:"active" bson:"active"`
 }

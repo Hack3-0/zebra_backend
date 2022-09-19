@@ -3,15 +3,18 @@ package service
 import (
 	"time"
 	"zebra/model"
+	"zebra/pkg/fcmService"
 	"zebra/pkg/repository"
 )
 
 type OrderService struct {
-	repo repository.Order
+	repo         repository.Order
+	pushService  fcmService.Push
+	localService fcmService.Local
 }
 
-func NewOrderService(repo repository.Order) *OrderService {
-	return &OrderService{repo: repo}
+func NewOrderService(repo repository.Order, pushService fcmService.Push, localService fcmService.Local) *OrderService {
+	return &OrderService{repo: repo, pushService: pushService, localService: localService}
 }
 
 func (s *OrderService) CreateOrder(data model.ReqOrder) error {
