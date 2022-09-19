@@ -113,6 +113,12 @@ func (h *Handler) createFeedback(c *gin.Context) {
 	}
 
 	ReqFeed.UserID = id
+	user, err := h.services.User.GetUserByID(id)
+	if err != nil {
+		defaultErrorHandler(c, err)
+		return
+	}
+	ReqFeed.Username = user.Username
 
 	err = h.services.Order.CreateFeedback(ReqFeed)
 	if err != nil {

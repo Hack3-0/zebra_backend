@@ -15,6 +15,7 @@ type Order struct {
 type FeedBack struct {
 	ID             int    `json:"id" bson:"id"`
 	UserID         int    `json:"userID" bson:"userID"`
+	Username       string `json:"username" bson:"username"`
 	OrderID        int    `json:"orderID" bson:"orderID"`
 	OrganizationID int    `json:"organizationID" bson:"organizationID"`
 	Text           string `json:"text" bson:"text"`
